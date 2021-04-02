@@ -112,5 +112,7 @@ definitions:
         type: "string"
       username:
         type: "string"
+      verified:
+        type: "boolean"
     xml:
       name: "User"
