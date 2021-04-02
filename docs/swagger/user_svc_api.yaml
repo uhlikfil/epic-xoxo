@@ -4,7 +4,7 @@ info:
   description: Microservice API for user management
   version: "1.0"
 servers:
-- url: /
+- url: http://localhost:8080/api/v1
 paths:
   /user:
     post:
@@ -15,9 +15,9 @@ paths:
       requestBody:
         description: Created user object
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
         required: true
       responses:
         200:
@@ -25,14 +25,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         400:
           description: Invalid user supplied
           content: {}
         409:
           description: User already exists
           content: {}
-      x-codegen-request-body-name: body
   /user/{username}:
     get:
       tags:
@@ -52,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         400:
           description: Invalid username supplied
           content: {}
@@ -74,9 +73,9 @@ paths:
       requestBody:
         description: Updated user object
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
         required: true
       responses:
         200:
@@ -84,14 +83,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         400:
           description: Invalid user supplied
           content: {}
         404:
           description: User not found
           content: {}
-      x-codegen-request-body-name: body
     delete:
       tags:
       - user
@@ -133,7 +131,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/UserDetail"
         400:
           description: Invalid username supplied
           content: {}
@@ -143,22 +141,17 @@ paths:
 components:
   schemas:
     User:
+      description: user object
       type: object
       properties:
-        id:
-          type: integer
+        username:
+          type: string
         email:
           type: string
         password_hash:
           type: string
-        username:
-          type: string
-        verified:
-          type: boolean
-      description: user object
-      xml:
-        name: User
     UserDetail:
+      description: user object with aggregated data
       allOf:
         - $ref: "#/components/schemas/User"
         - type: object
