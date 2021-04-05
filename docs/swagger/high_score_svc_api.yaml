@@ -1,0 +1,19 @@
+openapi: 3.0.1
+info:
+  title: High Score
+  description: Microservice API for High Score
+  version: 1.0-oas3
+servers:
+  - url: 'http://localhost:8003/api/v1'
+components:
+  schemas:
+    HighScore:
+      description: high score object
+      type: object
+      properties:
+        username:
+          type: string
+        wins:
+          type: integer
+        loses:
+          type: integer

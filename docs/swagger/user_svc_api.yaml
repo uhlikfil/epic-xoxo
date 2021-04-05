@@ -2,140 +2,140 @@ openapi: 3.0.1
 info:
   title: Users
   description: Microservice API for user management
-  version: "1.0"
+  version: 1.0-oas3
 servers:
-- url: http://localhost:8080/api/v1
+  - url: 'http://localhost:8001/api/v1'
 paths:
   /user:
     post:
       tags:
-      - user
+        - user
       summary: Create a new user
       operationId: create_user
       requestBody:
         description: Created user object
         content:
-          "*/*":
+          application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: '#/components/schemas/User'
         required: true
       responses:
-        200:
-          description: User created and is returned
+        '200':
+          description: User was created and is returned
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        400:
+                $ref: '#/components/schemas/User'
+        '400':
           description: Invalid user supplied
           content: {}
-        409:
+        '409':
           description: User already exists
           content: {}
-  /user/{username}:
+  '/user/{username}':
     get:
       tags:
-      - user
+        - user
       summary: Get user by username
       operationId: get_user_by_username
       parameters:
-      - name: username
-        in: path
-        description: The username that needs to be fetched
-        required: true
-        schema:
-          type: string
+        - name: username
+          in: path
+          description: The username that needs to be fetched
+          required: true
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        400:
+                $ref: '#/components/schemas/User'
+        '400':
           description: Invalid username supplied
           content: {}
-        404:
+        '404':
           description: User not found
           content: {}
     put:
       tags:
-      - user
+        - user
       summary: Update user
       operationId: update_user
       parameters:
-      - name: username
-        in: path
-        description: user that needs to be updated
-        required: true
-        schema:
-          type: string
+        - name: username
+          in: path
+          description: user that needs to be updated
+          required: true
+          schema:
+            type: string
       requestBody:
         description: Updated user object
         content:
-          "*/*":
+          application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: '#/components/schemas/User'
         required: true
       responses:
-        200:
+        '200':
           description: User updated successfully
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        400:
+                $ref: '#/components/schemas/User'
+        '400':
           description: Invalid user supplied
           content: {}
-        404:
+        '404':
           description: User not found
           content: {}
     delete:
       tags:
-      - user
+        - user
       summary: Delete user
       operationId: delete_user
       parameters:
-      - name: username
-        in: path
-        description: The user that needs to be deleted
-        required: true
-        schema:
-          type: string
+        - name: username
+          in: path
+          description: The user that needs to be deleted
+          required: true
+          schema:
+            type: string
       responses:
-        204:
+        '204':
           description: User deleted successfully
           content: {}
-        400:
+        '400':
           description: Invalid username supplied
           content: {}
-        404:
+        '404':
           description: User not found
           content: {}
-  /userdetail/{username}:
+  '/userdetail/{username}':
     get:
       tags:
         - user
       summary: User with other aggregated data
       operationId: get_userdetail
       parameters:
-      - name: username
-        in: path
-        description: The username that needs to be fetched
-        required: true
-        schema:
-          type: string
+        - name: username
+          in: path
+          description: The username that needs to be fetched
+          required: true
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDetail"
-        400:
+                $ref: '#/components/schemas/UserDetail'
+        '400':
           description: Invalid username supplied
           content: {}
-        404:
+        '404':
           description: User not found
           content: {}
 components:
@@ -150,13 +150,21 @@ components:
           type: string
         password_hash:
           type: string
+        created:
+          type: integer
+        last_updated:
+          type: integer
     UserDetail:
       description: user object with aggregated data
       allOf:
-        - $ref: "#/components/schemas/User"
+        - $ref: '#/components/schemas/User'
         - type: object
       properties:
         achievements:
           type: array
           items:
-            type: string
+            $ref: 'achievement_svc_api.yaml#/components/schemas/Achievement'
+        high_scores:
+          type: array
+          items:
+            $ref: 'high_score_svc_api.yaml#/components/schemas/HighScore'

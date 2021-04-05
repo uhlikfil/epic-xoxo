@@ -1,0 +1,233 @@
+openapi: 3.0.1
+info:
+  title: Users
+  description: Microservice API for user management
+  version: 1.0-oas3
+servers:
+- url: http://localhost:8001/api/v1
+paths:
+  /user:
+    post:
+      tags:
+      - user
+      summary: Create a new user
+      operationId: create_user
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: User was created and is returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Invalid user supplied
+          content: {}
+        "409":
+          description: User already exists
+          content: {}
+      x-openapi-router-controller: user_svc.controllers.user_controller
+  /user/{username}:
+    get:
+      tags:
+      - user
+      summary: Get user by username
+      operationId: get_user_by_username
+      parameters:
+      - name: username
+        in: path
+        description: The username that needs to be fetched
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Invalid username supplied
+          content: {}
+        "404":
+          description: User not found
+          content: {}
+      x-openapi-router-controller: user_svc.controllers.user_controller
+    put:
+      tags:
+      - user
+      summary: Update user
+      operationId: update_user
+      parameters:
+      - name: username
+        in: path
+        description: user that needs to be updated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Updated user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Invalid user supplied
+          content: {}
+        "404":
+          description: User not found
+          content: {}
+      x-openapi-router-controller: user_svc.controllers.user_controller
+    delete:
+      tags:
+      - user
+      summary: Delete user
+      operationId: delete_user
+      parameters:
+      - name: username
+        in: path
+        description: The user that needs to be deleted
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: User deleted successfully
+          content: {}
+        "400":
+          description: Invalid username supplied
+          content: {}
+        "404":
+          description: User not found
+          content: {}
+      x-openapi-router-controller: user_svc.controllers.user_controller
+  /userdetail/{username}:
+    get:
+      tags:
+      - user
+      summary: User with other aggregated data
+      operationId: get_userdetail
+      parameters:
+      - name: username
+        in: path
+        description: The username that needs to be fetched
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetail'
+        "400":
+          description: Invalid username supplied
+          content: {}
+        "404":
+          description: User not found
+          content: {}
+      x-openapi-router-controller: user_svc.controllers.user_controller
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password_hash:
+          type: string
+        created:
+          type: integer
+        last_updated:
+          type: integer
+      description: user object
+      example:
+        last_updated: 6
+        created: 0
+        password_hash: password_hash
+        email: email
+        username: username
+    UserDetail:
+      properties:
+        achievements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Achievement'
+        high_scores:
+          type: array
+          items:
+            $ref: '#/components/schemas/HighScore'
+      description: user object with aggregated data
+      example:
+        high_scores:
+        - wins: 6
+          loses: 1
+          username: username
+        - wins: 6
+          loses: 1
+          username: username
+        achievements:
+        - name: name
+          description: description
+          achievement_points: 0
+        - name: name
+          description: description
+          achievement_points: 0
+      allOf:
+      - $ref: '#/components/schemas/User'
+      - type: object
+    Achievement:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        achievement_points:
+          type: integer
+      description: achievement object
+      example:
+        name: name
+        description: description
+        achievement_points: 0
+    HighScore:
+      type: object
+      properties:
+        username:
+          type: string
+        wins:
+          type: integer
+        loses:
+          type: integer
+      description: high score object
+      example:
+        wins: 6
+        loses: 1
+        username: username
+

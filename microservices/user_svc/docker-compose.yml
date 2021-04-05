@@ -5,13 +5,21 @@ services:
     image: mysql
     container_name: user_db_container
     env_file: .env
-    ports:
-      - ${DB_PORT}:${DB_PORT}
     volumes:
-      - ./database/scheme.sql:/docker-entrypoint-initdb.d/scheme.sql:rw
+      - ./database:/docker-entrypoint-initdb.d
       - db_data:/var/lib/mysql
 
-  #### FOR DEBUGGING PUPROSES ####
+  app:
+    container_name: user_svc_container
+    depends_on:
+      - user_db
+    env_file: .env
+    ports:
+      - ${APP_PORT_OUT}:${APP_PORT}
+    build: .
+    command: python3 -m user_svc
+
+  #### FOR DEBUGGING PURPOSES ####
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpadmin_container

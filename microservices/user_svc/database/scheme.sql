@@ -1,6 +1,8 @@
 CREATE TABLE IF NOT EXISTS Users (
-    username varchar(64) NOT NULL,
-    email varchar(64) NOT NULL,
-    password_hash varchar(64) NOT NULL,
+    username VARCHAR(64) NOT NULL,
+    email VARCHAR(64) NOT NULL,
+    password_hash VARCHAR(64) NOT NULL,
+    created TIMESTAMP DEfAULT CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (username)
 ) ENGINE=InnoDB

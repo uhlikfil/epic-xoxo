@@ -1,0 +1,13 @@
+.gitignore
+.dockerignore
+requirements.txt
+test-requirements.txt
+tox.ini
+Dockerfile
+.travis.yml
+git_push.sh
+README.md
+setup.py
+**/*
+!user_svc/models/**
+!user_svc/swagger/**
