@@ -264,8 +264,8 @@ class MessageHandler {
                     else {
                         context.lobby.game.winner = 1
                     }
-                    if (context.lobby.host) {context.lobby.host(mes('winner', context.lobby.game.winner))}
-                    if (context.lobby.other) {context.other.host(mes('winner', context.lobby.game.winner))}
+                    if (context.lobby.host) {context.lobby.host.send(mes('winner', context.lobby.game.winner))}
+                    if (context.lobby.other) {context.lobby.other.send(mes('winner', context.lobby.game.winner))}
                 }
                 break;
             default:
