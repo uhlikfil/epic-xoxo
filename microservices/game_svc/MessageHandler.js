@@ -99,6 +99,8 @@ class MessageHandler {
                         id: value.id,
                         author: value.host ? value.host.id : 'no host (wtf)', players: value.connections.length
                     }
+                }).filter((v) => {
+                    return gb.lobbies[v.id].inGame == false
                 })
                 socket.send(JSON.stringify({code: 'lobbies', payload: lobs}))
                 break;
