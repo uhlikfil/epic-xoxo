@@ -6,15 +6,15 @@ info:
     email: neuvimat@fel.cvut.cz
   version: 1.0.0
 servers:
-- url: http://localhost/api/v3
+  - url: http://localhost/api/v3
 tags:
-- name: replay
-  description: Sum stuff 'bout 'em replayz
+  - name: replay
+    description: Sum stuff 'bout 'em replayz
 paths:
   /replay:
     put:
       tags:
-      - replay
+        - replay
       summary: Update an existing replay
       operationId: update_replay
       requestBody:
@@ -36,7 +36,7 @@ paths:
           content: {}
     post:
       tags:
-      - replay
+        - replay
       summary: Add a new replay to the store
       operationId: add_replay
       requestBody:
@@ -59,7 +59,7 @@ paths:
   /replay/filter:
     post:
       tags:
-      - replay
+        - replay
       summary: Search across all the replays
       description: Filters through replays based on supplied filters. Returns abridged version of replays, where the specific turns (field `plays`) are not listed for brevity. If you need that, ask for a specific replay by its id. Also it is okay to use post method for liters because mongoDB does it too :)
       operationId: filter_replays
@@ -82,18 +82,18 @@ paths:
   /replay/{replayId}:
     get:
       tags:
-      - replay
+        - replay
       summary: Get a replay by ID
       description: Returns a single replay by its ID
       operationId: get_replay_by_id
       parameters:
-      - name: replayId
-        in: path
-        description: ID of replay to return
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: replayId
+          in: path
+          description: ID of replay to return
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         200:
           description: successful operation
@@ -109,17 +109,17 @@ paths:
           content: {}
     delete:
       tags:
-      - replay
+        - replay
       summary: Deletes a replay
       operationId: delete_replay
       parameters:
-      - name: replayId
-        in: path
-        description: Replay id to delete
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: replayId
+          in: path
+          description: Replay id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         200:
           description: success
@@ -132,40 +132,6 @@ paths:
           content: {}
 components:
   schemas:
-    Replay:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        player1Id:
-          description: The host of the match
-          type: integer
-          format: int64
-        player2Id:
-          description: The other player (i.e. not the host)
-          type: integer
-          format: int64
-        winner:
-          description: ID of the winner
-          type: integer
-          format: int64
-        rounds:
-          description: How many rounds the match took
-          type: integer
-          format: int64
-        date:
-          type: string
-          format: date-time
-        completed:
-          type: boolean
-          description: Whether the game finished as expected (`true`) or the opponent has left the game (`false`)
-        plays:
-          type: array
-          items:
-            type: integer
-          minItems: 2
-          maxItems: 2
     ReplayShort:
       type: object
       properties:
@@ -174,22 +140,33 @@ components:
           format: int64
         player1Id:
           description: The host of the match
-          type: integer
-          format: int64
+          type: string
         player2Id:
           description: The other player (i.e. not the host)
-          type: integer
-          format: int64
+          type: string
         rounds:
           description: How many rounds the match took
           type: integer
           format: int64
         date:
-          type: string
-          format: date-time
+          type: integer
         completed:
+          description: Is `true` if the game ended properly, `false` if the opponent ragequit.
           type: boolean
-          description: Whether the game finished as expected (`true`) or the opponent has left the game (`false`)
+    Replay:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ReplayShort'
+        - type: object
+      properties:
+        plays:
+          type: array
+          items:
+            type: array
+            items:
+              type: integer
+              minItems: 2
+              maxItems: 2
     ReplayArray:
       type: array
       items:
@@ -209,11 +186,9 @@ components:
           type: object
           properties:
             before:
-              type: string
-              format: date-time
+              type: integer
             after:
-              type: string
-              format: date-time
+              type: integer
         completed:
           type: boolean
           description: Whether the game finished as expected (`true`) or the opponent has left the game (`false`)
