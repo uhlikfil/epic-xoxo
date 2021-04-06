@@ -2,8 +2,7 @@ import os
 from contextlib import contextmanager
 
 import mysql.connector as cn
-from user_svc.database.queries import (DELETE_USER, INSERT_USER, SELECT_USER,
-                                       UPDATE_USER)
+from user_svc.database.queries import DELETE_USER, INSERT_USER, SELECT_USER, UPDATE_USER
 from user_svc.models import User
 
 CONNECTION_CONFIG = {
@@ -13,6 +12,7 @@ CONNECTION_CONFIG = {
     "password": os.getenv("MYSQL_PASSWORD"),
     "database": os.getenv("MYSQL_DATABASE"),
 }
+
 
 @contextmanager
 def get_connection():
@@ -35,7 +35,9 @@ def insert_user(user: User) -> bool:
     with get_connection() as cnx:
         with cnx.cursor() as cursor:
             try:
-                cursor.execute(INSERT_USER, (user.username, user.origin_ip, user.last_ip))
+                cursor.execute(
+                    INSERT_USER, (user.username, user.origin_ip, user.last_ip)
+                )
                 return cursor.rowcount == 1
             except cn.errors.IntegrityError:
                 return False

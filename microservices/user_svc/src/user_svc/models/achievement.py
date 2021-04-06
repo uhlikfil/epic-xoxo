@@ -14,7 +14,10 @@ class Achievement(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, name: str=None, description: str=None, achievement_points: int=None):  # noqa: E501
+
+    def __init__(
+        self, name: str = None, description: str = None, achievement_points: int = None
+    ):  # noqa: E501
         """Achievement - a model defined in Swagger
 
         :param name: The name of this Achievement.  # noqa: E501
@@ -25,22 +28,22 @@ class Achievement(Model):
         :type achievement_points: int
         """
         self.swagger_types = {
-            'name': str,
-            'description': str,
-            'achievement_points': int
+            "name": str,
+            "description": str,
+            "achievement_points": int,
         }
 
         self.attribute_map = {
-            'name': 'name',
-            'description': 'description',
-            'achievement_points': 'achievement_points'
+            "name": "name",
+            "description": "description",
+            "achievement_points": "achievement_points",
         }
         self._name = name
         self._description = description
         self._achievement_points = achievement_points
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Achievement':
+    def from_dict(cls, dikt) -> "Achievement":
         """Returns the dict as a model
 
         :param dikt: A dict.

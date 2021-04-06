@@ -88,7 +88,7 @@ def get_userdetail(username):  # noqa: E501
 
     :rtype: UserDetail
     """
-    return 'not yet implemented'
+    return "not yet implemented"
 
 
 def update_user(body, username):  # noqa: E501

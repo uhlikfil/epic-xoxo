@@ -17,7 +17,17 @@ class UserDetail(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, username: str=None, origin_ip: str=None, last_ip: str=None, created: int=None, updated: int=None, achievements: List[Achievement]=None, high_score: HighScore=None):  # noqa: E501
+
+    def __init__(
+        self,
+        username: str = None,
+        origin_ip: str = None,
+        last_ip: str = None,
+        created: int = None,
+        updated: int = None,
+        achievements: List[Achievement] = None,
+        high_score: HighScore = None,
+    ):  # noqa: E501
         """UserDetail - a model defined in Swagger
 
         :param username: The username of this UserDetail.  # noqa: E501
@@ -36,23 +46,23 @@ class UserDetail(Model):
         :type high_score: HighScore
         """
         self.swagger_types = {
-            'username': str,
-            'origin_ip': str,
-            'last_ip': str,
-            'created': int,
-            'updated': int,
-            'achievements': List[Achievement],
-            'high_score': HighScore
+            "username": str,
+            "origin_ip": str,
+            "last_ip": str,
+            "created": int,
+            "updated": int,
+            "achievements": List[Achievement],
+            "high_score": HighScore,
         }
 
         self.attribute_map = {
-            'username': 'username',
-            'origin_ip': 'origin_ip',
-            'last_ip': 'last_ip',
-            'created': 'created',
-            'updated': 'updated',
-            'achievements': 'achievements',
-            'high_score': 'high_score'
+            "username": "username",
+            "origin_ip": "origin_ip",
+            "last_ip": "last_ip",
+            "created": "created",
+            "updated": "updated",
+            "achievements": "achievements",
+            "high_score": "high_score",
         }
         self._username = username
         self._origin_ip = origin_ip
@@ -63,7 +73,7 @@ class UserDetail(Model):
         self._high_score = high_score
 
     @classmethod
-    def from_dict(cls, dikt) -> 'UserDetail':
+    def from_dict(cls, dikt) -> "UserDetail":
         """Returns the dict as a model
 
         :param dikt: A dict.

@@ -14,23 +14,20 @@ class Error(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, reason: str=None):  # noqa: E501
+
+    def __init__(self, reason: str = None):  # noqa: E501
         """Error - a model defined in Swagger
 
         :param reason: The reason of this Error.  # noqa: E501
         :type reason: str
         """
-        self.swagger_types = {
-            'reason': str
-        }
+        self.swagger_types = {"reason": str}
 
-        self.attribute_map = {
-            'reason': 'reason'
-        }
+        self.attribute_map = {"reason": "reason"}
         self._reason = reason
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Error':
+    def from_dict(cls, dikt) -> "Error":
         """Returns the dict as a model
 
         :param dikt: A dict.
