@@ -14,40 +14,40 @@ class User(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, username: str=None, email: str=None, password_hash: str=None, created: int=None, last_updated: int=None):  # noqa: E501
+    def __init__(self, username: str=None, origin_ip: str=None, last_ip: str=None, created: int=None, updated: int=None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param username: The username of this User.  # noqa: E501
         :type username: str
-        :param email: The email of this User.  # noqa: E501
-        :type email: str
-        :param password_hash: The password_hash of this User.  # noqa: E501
-        :type password_hash: str
+        :param origin_ip: The origin_ip of this User.  # noqa: E501
+        :type origin_ip: str
+        :param last_ip: The last_ip of this User.  # noqa: E501
+        :type last_ip: str
         :param created: The created of this User.  # noqa: E501
         :type created: int
-        :param last_updated: The last_updated of this User.  # noqa: E501
-        :type last_updated: int
+        :param updated: The updated of this User.  # noqa: E501
+        :type updated: int
         """
         self.swagger_types = {
             'username': str,
-            'email': str,
-            'password_hash': str,
+            'origin_ip': str,
+            'last_ip': str,
             'created': int,
-            'last_updated': int
+            'updated': int
         }
 
         self.attribute_map = {
             'username': 'username',
-            'email': 'email',
-            'password_hash': 'password_hash',
+            'origin_ip': 'origin_ip',
+            'last_ip': 'last_ip',
             'created': 'created',
-            'last_updated': 'last_updated'
+            'updated': 'updated'
         }
         self._username = username
-        self._email = email
-        self._password_hash = password_hash
+        self._origin_ip = origin_ip
+        self._last_ip = last_ip
         self._created = created
-        self._last_updated = last_updated
+        self._updated = updated
 
     @classmethod
     def from_dict(cls, dikt) -> 'User':
@@ -82,46 +82,46 @@ class User(Model):
         self._username = username
 
     @property
-    def email(self) -> str:
-        """Gets the email of this User.
+    def origin_ip(self) -> str:
+        """Gets the origin_ip of this User.
 
 
-        :return: The email of this User.
+        :return: The origin_ip of this User.
         :rtype: str
         """
-        return self._email
+        return self._origin_ip
 
-    @email.setter
-    def email(self, email: str):
-        """Sets the email of this User.
+    @origin_ip.setter
+    def origin_ip(self, origin_ip: str):
+        """Sets the origin_ip of this User.
 
 
-        :param email: The email of this User.
-        :type email: str
+        :param origin_ip: The origin_ip of this User.
+        :type origin_ip: str
         """
 
-        self._email = email
+        self._origin_ip = origin_ip
 
     @property
-    def password_hash(self) -> str:
-        """Gets the password_hash of this User.
+    def last_ip(self) -> str:
+        """Gets the last_ip of this User.
 
 
-        :return: The password_hash of this User.
+        :return: The last_ip of this User.
         :rtype: str
         """
-        return self._password_hash
+        return self._last_ip
 
-    @password_hash.setter
-    def password_hash(self, password_hash: str):
-        """Sets the password_hash of this User.
+    @last_ip.setter
+    def last_ip(self, last_ip: str):
+        """Sets the last_ip of this User.
 
 
-        :param password_hash: The password_hash of this User.
-        :type password_hash: str
+        :param last_ip: The last_ip of this User.
+        :type last_ip: str
         """
 
-        self._password_hash = password_hash
+        self._last_ip = last_ip
 
     @property
     def created(self) -> int:
@@ -145,22 +145,22 @@ class User(Model):
         self._created = created
 
     @property
-    def last_updated(self) -> int:
-        """Gets the last_updated of this User.
+    def updated(self) -> int:
+        """Gets the updated of this User.
 
 
-        :return: The last_updated of this User.
+        :return: The updated of this User.
         :rtype: int
         """
-        return self._last_updated
+        return self._updated
 
-    @last_updated.setter
-    def last_updated(self, last_updated: int):
-        """Sets the last_updated of this User.
+    @updated.setter
+    def updated(self, updated: int):
+        """Sets the updated of this User.
 
 
-        :param last_updated: The last_updated of this User.
-        :type last_updated: int
+        :param updated: The updated of this User.
+        :type updated: int
         """
 
-        self._last_updated = last_updated
+        self._updated = updated

@@ -13,7 +13,7 @@ paths:
       summary: Create a new user
       operationId: create_user
       requestBody:
-        description: Created user object
+        description: User to create
         content:
           application/json:
             schema:
@@ -28,10 +28,16 @@ paths:
                 $ref: '#/components/schemas/User'
         "400":
           description: Invalid user supplied
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         "409":
           description: User already exists
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       x-openapi-router-controller: user_svc.controllers.user_controller
   /user/{username}:
     get:
@@ -57,10 +63,16 @@ paths:
                 $ref: '#/components/schemas/User'
         "400":
           description: Invalid username supplied
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         "404":
           description: User not found
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       x-openapi-router-controller: user_svc.controllers.user_controller
     put:
       tags:
@@ -77,11 +89,11 @@ paths:
         schema:
           type: string
       requestBody:
-        description: Updated user object
+        description: The last IP to update
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/body'
         required: true
       responses:
         "200":
@@ -91,11 +103,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         "400":
-          description: Invalid user supplied
-          content: {}
+          description: Invalid data supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         "404":
           description: User not found
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       x-openapi-router-controller: user_svc.controllers.user_controller
     delete:
       tags:
@@ -114,13 +132,18 @@ paths:
       responses:
         "204":
           description: User deleted successfully
-          content: {}
         "400":
           description: Invalid username supplied
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         "404":
           description: User not found
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       x-openapi-router-controller: user_svc.controllers.user_controller
   /userdetail/{username}:
     get:
@@ -146,10 +169,16 @@ paths:
                 $ref: '#/components/schemas/UserDetail'
         "400":
           description: Invalid username supplied
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         "404":
           description: User not found
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       x-openapi-router-controller: user_svc.controllers.user_controller
 components:
   schemas:
@@ -158,20 +187,22 @@ components:
       properties:
         username:
           type: string
-        email:
+        origin_ip:
           type: string
-        password_hash:
+        last_ip:
           type: string
         created:
           type: integer
-        last_updated:
+          readOnly: true
+        updated:
           type: integer
+          readOnly: true
       description: user object
       example:
-        last_updated: 6
+        last_ip: last_ip
         created: 0
-        password_hash: password_hash
-        email: email
+        updated: 6
+        origin_ip: origin_ip
         username: username
     UserDetail:
       properties:
@@ -179,19 +210,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Achievement'
-        high_scores:
-          type: array
-          items:
-            $ref: '#/components/schemas/HighScore'
+        high_score:
+          $ref: '#/components/schemas/HighScore'
       description: user object with aggregated data
       example:
-        high_scores:
-        - wins: 6
-          loses: 1
-          username: username
-        - wins: 6
-          loses: 1
-          username: username
         achievements:
         - name: name
           description: description
@@ -199,9 +221,19 @@ components:
         - name: name
           description: description
           achievement_points: 0
+        high_score:
+          wins: 6
+          loses: 1
+          username: username
       allOf:
       - $ref: '#/components/schemas/User'
       - type: object
+    Error:
+      type: object
+      properties:
+        reason:
+          type: string
+      description: Error response
     Achievement:
       type: object
       properties:
@@ -230,4 +262,11 @@ components:
         wins: 6
         loses: 1
         username: username
+    body:
+      required:
+      - ip
+      type: object
+      properties:
+        ip:
+          type: string
 

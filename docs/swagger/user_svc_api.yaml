@@ -13,7 +13,7 @@ paths:
       summary: Create a new user
       operationId: create_user
       requestBody:
-        description: Created user object
+        description: User to create
         content:
           application/json:
             schema:
@@ -28,10 +28,16 @@ paths:
                 $ref: '#/components/schemas/User'
         '400':
           description: Invalid user supplied
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
         '409':
           description: User already exists
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
   '/user/{username}':
     get:
       tags:
@@ -54,10 +60,16 @@ paths:
                 $ref: '#/components/schemas/User'
         '400':
           description: Invalid username supplied
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
         '404':
           description: User not found
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
     put:
       tags:
         - user
@@ -71,11 +83,16 @@ paths:
           schema:
             type: string
       requestBody:
-        description: Updated user object
+        description: The last IP to update
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              type: object
+              properties:
+                ip:
+                  type: string
+              required:
+                - ip
         required: true
       responses:
         '200':
@@ -85,11 +102,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '400':
-          description: Invalid user supplied
-          content: {}
+          description: Invalid data supplied
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
         '404':
           description: User not found
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
     delete:
       tags:
         - user
@@ -105,13 +128,18 @@ paths:
       responses:
         '204':
           description: User deleted successfully
-          content: {}
         '400':
           description: Invalid username supplied
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
         '404':
           description: User not found
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
   '/userdetail/{username}':
     get:
       tags:
@@ -134,10 +162,16 @@ paths:
                 $ref: '#/components/schemas/UserDetail'
         '400':
           description: Invalid username supplied
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
         '404':
           description: User not found
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
 components:
   schemas:
     User:
@@ -146,14 +180,16 @@ components:
       properties:
         username:
           type: string
-        email:
+        origin_ip:
           type: string
-        password_hash:
+        last_ip:
           type: string
         created:
           type: integer
-        last_updated:
+          readOnly: true
+        updated:
           type: integer
+          readOnly: true
     UserDetail:
       description: user object with aggregated data
       allOf:
@@ -164,7 +200,6 @@ components:
           type: array
           items:
             $ref: 'achievement_svc_api.yaml#/components/schemas/Achievement'
-        high_scores:
-          type: array
-          items:
-            $ref: 'high_score_svc_api.yaml#/components/schemas/HighScore'
+        high_score:
+          type: object
+          $ref: 'high_score_svc_api.yaml#/components/schemas/HighScore'

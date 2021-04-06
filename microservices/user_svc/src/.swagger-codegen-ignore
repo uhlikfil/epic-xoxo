@@ -11,3 +11,5 @@ setup.py
 **/*
 !user_svc/models/**
 !user_svc/swagger/**
+#!user_svc/controllers/**
+#!user_svc/test/**

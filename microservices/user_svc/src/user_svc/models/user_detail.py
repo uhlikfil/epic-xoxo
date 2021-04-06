@@ -17,50 +17,50 @@ class UserDetail(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, username: str=None, email: str=None, password_hash: str=None, created: int=None, last_updated: int=None, achievements: List[Achievement]=None, high_scores: List[HighScore]=None):  # noqa: E501
+    def __init__(self, username: str=None, origin_ip: str=None, last_ip: str=None, created: int=None, updated: int=None, achievements: List[Achievement]=None, high_score: HighScore=None):  # noqa: E501
         """UserDetail - a model defined in Swagger
 
         :param username: The username of this UserDetail.  # noqa: E501
         :type username: str
-        :param email: The email of this UserDetail.  # noqa: E501
-        :type email: str
-        :param password_hash: The password_hash of this UserDetail.  # noqa: E501
-        :type password_hash: str
+        :param origin_ip: The origin_ip of this UserDetail.  # noqa: E501
+        :type origin_ip: str
+        :param last_ip: The last_ip of this UserDetail.  # noqa: E501
+        :type last_ip: str
         :param created: The created of this UserDetail.  # noqa: E501
         :type created: int
-        :param last_updated: The last_updated of this UserDetail.  # noqa: E501
-        :type last_updated: int
+        :param updated: The updated of this UserDetail.  # noqa: E501
+        :type updated: int
         :param achievements: The achievements of this UserDetail.  # noqa: E501
         :type achievements: List[Achievement]
-        :param high_scores: The high_scores of this UserDetail.  # noqa: E501
-        :type high_scores: List[HighScore]
+        :param high_score: The high_score of this UserDetail.  # noqa: E501
+        :type high_score: HighScore
         """
         self.swagger_types = {
             'username': str,
-            'email': str,
-            'password_hash': str,
+            'origin_ip': str,
+            'last_ip': str,
             'created': int,
-            'last_updated': int,
+            'updated': int,
             'achievements': List[Achievement],
-            'high_scores': List[HighScore]
+            'high_score': HighScore
         }
 
         self.attribute_map = {
             'username': 'username',
-            'email': 'email',
-            'password_hash': 'password_hash',
+            'origin_ip': 'origin_ip',
+            'last_ip': 'last_ip',
             'created': 'created',
-            'last_updated': 'last_updated',
+            'updated': 'updated',
             'achievements': 'achievements',
-            'high_scores': 'high_scores'
+            'high_score': 'high_score'
         }
         self._username = username
-        self._email = email
-        self._password_hash = password_hash
+        self._origin_ip = origin_ip
+        self._last_ip = last_ip
         self._created = created
-        self._last_updated = last_updated
+        self._updated = updated
         self._achievements = achievements
-        self._high_scores = high_scores
+        self._high_score = high_score
 
     @classmethod
     def from_dict(cls, dikt) -> 'UserDetail':
@@ -95,46 +95,46 @@ class UserDetail(Model):
         self._username = username
 
     @property
-    def email(self) -> str:
-        """Gets the email of this UserDetail.
+    def origin_ip(self) -> str:
+        """Gets the origin_ip of this UserDetail.
 
 
-        :return: The email of this UserDetail.
+        :return: The origin_ip of this UserDetail.
         :rtype: str
         """
-        return self._email
+        return self._origin_ip
 
-    @email.setter
-    def email(self, email: str):
-        """Sets the email of this UserDetail.
+    @origin_ip.setter
+    def origin_ip(self, origin_ip: str):
+        """Sets the origin_ip of this UserDetail.
 
 
-        :param email: The email of this UserDetail.
-        :type email: str
+        :param origin_ip: The origin_ip of this UserDetail.
+        :type origin_ip: str
         """
 
-        self._email = email
+        self._origin_ip = origin_ip
 
     @property
-    def password_hash(self) -> str:
-        """Gets the password_hash of this UserDetail.
+    def last_ip(self) -> str:
+        """Gets the last_ip of this UserDetail.
 
 
-        :return: The password_hash of this UserDetail.
+        :return: The last_ip of this UserDetail.
         :rtype: str
         """
-        return self._password_hash
+        return self._last_ip
 
-    @password_hash.setter
-    def password_hash(self, password_hash: str):
-        """Sets the password_hash of this UserDetail.
+    @last_ip.setter
+    def last_ip(self, last_ip: str):
+        """Sets the last_ip of this UserDetail.
 
 
-        :param password_hash: The password_hash of this UserDetail.
-        :type password_hash: str
+        :param last_ip: The last_ip of this UserDetail.
+        :type last_ip: str
         """
 
-        self._password_hash = password_hash
+        self._last_ip = last_ip
 
     @property
     def created(self) -> int:
@@ -158,25 +158,25 @@ class UserDetail(Model):
         self._created = created
 
     @property
-    def last_updated(self) -> int:
-        """Gets the last_updated of this UserDetail.
+    def updated(self) -> int:
+        """Gets the updated of this UserDetail.
 
 
-        :return: The last_updated of this UserDetail.
+        :return: The updated of this UserDetail.
         :rtype: int
         """
-        return self._last_updated
+        return self._updated
 
-    @last_updated.setter
-    def last_updated(self, last_updated: int):
-        """Sets the last_updated of this UserDetail.
+    @updated.setter
+    def updated(self, updated: int):
+        """Sets the updated of this UserDetail.
 
 
-        :param last_updated: The last_updated of this UserDetail.
-        :type last_updated: int
+        :param updated: The updated of this UserDetail.
+        :type updated: int
         """
 
-        self._last_updated = last_updated
+        self._updated = updated
 
     @property
     def achievements(self) -> List[Achievement]:
@@ -200,22 +200,22 @@ class UserDetail(Model):
         self._achievements = achievements
 
     @property
-    def high_scores(self) -> List[HighScore]:
-        """Gets the high_scores of this UserDetail.
+    def high_score(self) -> HighScore:
+        """Gets the high_score of this UserDetail.
 
 
-        :return: The high_scores of this UserDetail.
-        :rtype: List[HighScore]
+        :return: The high_score of this UserDetail.
+        :rtype: HighScore
         """
-        return self._high_scores
+        return self._high_score
 
-    @high_scores.setter
-    def high_scores(self, high_scores: List[HighScore]):
-        """Sets the high_scores of this UserDetail.
+    @high_score.setter
+    def high_score(self, high_score: HighScore):
+        """Sets the high_score of this UserDetail.
 
 
-        :param high_scores: The high_scores of this UserDetail.
-        :type high_scores: List[HighScore]
+        :param high_score: The high_score of this UserDetail.
+        :type high_score: HighScore
         """
 
-        self._high_scores = high_scores
+        self._high_score = high_score

@@ -1,0 +1,8 @@
+components:
+  schemas:
+    Error:
+      description: Error response
+      type: object
+      properties:
+        reason:
+          type: string
