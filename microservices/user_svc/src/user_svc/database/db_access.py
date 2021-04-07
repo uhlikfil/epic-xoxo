@@ -35,9 +35,7 @@ def insert_user(user: User) -> bool:
     with get_connection() as cnx:
         with cnx.cursor() as cursor:
             try:
-                cursor.execute(
-                    INSERT, (user.username, user.origin_ip, user.last_ip)
-                )
+                cursor.execute(INSERT, (user.username, user.origin_ip, user.last_ip))
                 return cursor.rowcount == 1
             except cn.errors.IntegrityError:
                 return False

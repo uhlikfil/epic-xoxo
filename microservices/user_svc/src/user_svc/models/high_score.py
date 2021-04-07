@@ -16,7 +16,12 @@ class HighScore(Model):
     """
 
     def __init__(
-        self, username: str = None, wins: int = None, loses: int = None
+        self,
+        username: str = None,
+        wins: int = None,
+        loses: int = None,
+        ragequits: int = None,
+        rank: int = None,
     ):  # noqa: E501
         """HighScore - a model defined in Swagger
 
@@ -26,13 +31,31 @@ class HighScore(Model):
         :type wins: int
         :param loses: The loses of this HighScore.  # noqa: E501
         :type loses: int
+        :param ragequits: The ragequits of this HighScore.  # noqa: E501
+        :type ragequits: int
+        :param rank: The rank of this HighScore.  # noqa: E501
+        :type rank: int
         """
-        self.swagger_types = {"username": str, "wins": int, "loses": int}
+        self.swagger_types = {
+            "username": str,
+            "wins": int,
+            "loses": int,
+            "ragequits": int,
+            "rank": int,
+        }
 
-        self.attribute_map = {"username": "username", "wins": "wins", "loses": "loses"}
+        self.attribute_map = {
+            "username": "username",
+            "wins": "wins",
+            "loses": "loses",
+            "ragequits": "ragequits",
+            "rank": "rank",
+        }
         self._username = username
         self._wins = wins
         self._loses = loses
+        self._ragequits = ragequits
+        self._rank = rank
 
     @classmethod
     def from_dict(cls, dikt) -> "HighScore":
@@ -107,3 +130,45 @@ class HighScore(Model):
         """
 
         self._loses = loses
+
+    @property
+    def ragequits(self) -> int:
+        """Gets the ragequits of this HighScore.
+
+
+        :return: The ragequits of this HighScore.
+        :rtype: int
+        """
+        return self._ragequits
+
+    @ragequits.setter
+    def ragequits(self, ragequits: int):
+        """Sets the ragequits of this HighScore.
+
+
+        :param ragequits: The ragequits of this HighScore.
+        :type ragequits: int
+        """
+
+        self._ragequits = ragequits
+
+    @property
+    def rank(self) -> int:
+        """Gets the rank of this HighScore.
+
+
+        :return: The rank of this HighScore.
+        :rtype: int
+        """
+        return self._rank
+
+    @rank.setter
+    def rank(self, rank: int):
+        """Sets the rank of this HighScore.
+
+
+        :param rank: The rank of this HighScore.
+        :type rank: int
+        """
+
+        self._rank = rank

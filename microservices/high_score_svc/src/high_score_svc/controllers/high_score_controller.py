@@ -16,7 +16,7 @@ def get_high_score_top():  # noqa: E501
 
     :rtype: HighScoreArray
     """
-    return 'do some magic!'
+    return "do some magic!"
 
 
 def get_user_high_score(username):  # noqa: E501
@@ -29,7 +29,7 @@ def get_user_high_score(username):  # noqa: E501
 
     :rtype: HighScore
     """
-    return 'do some magic!'
+    return "do some magic!"
 
 
 def post_high_score_update(body, username):  # noqa: E501
@@ -46,4 +46,4 @@ def post_high_score_update(body, username):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Body.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return "do some magic!"

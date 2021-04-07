@@ -20,11 +20,8 @@ class TestHighScoreController(BaseTestCase):
 
         Get the top 10 users
         """
-        response = self.client.open(
-            '/api/v1/high_score',
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        response = self.client.open("/api/v1/high_score", method="GET")
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_get_user_high_score(self):
         """Test case for get_user_high_score
@@ -32,10 +29,10 @@ class TestHighScoreController(BaseTestCase):
         Get the ranking of the desired user
         """
         response = self.client.open(
-            '/api/v1/high_score/{username}'.format(username='username_example'),
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            "/api/v1/high_score/{username}".format(username="username_example"),
+            method="GET",
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_post_high_score_update(self):
         """Test case for post_high_score_update
@@ -44,14 +41,15 @@ class TestHighScoreController(BaseTestCase):
         """
         body = Body()
         response = self.client.open(
-            '/api/v1/high_score/{username}'.format(username='username_example'),
-            method='POST',
+            "/api/v1/high_score/{username}".format(username="username_example"),
+            method="POST",
             data=json.dumps(body),
-            content_type='application/json')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            content_type="application/json",
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import unittest
+
     unittest.main()

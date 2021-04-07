@@ -14,23 +14,20 @@ class Body(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, game_result: str=None):  # noqa: E501
+
+    def __init__(self, game_result: str = None):  # noqa: E501
         """Body - a model defined in Swagger
 
         :param game_result: The game_result of this Body.  # noqa: E501
         :type game_result: str
         """
-        self.swagger_types = {
-            'game_result': str
-        }
+        self.swagger_types = {"game_result": str}
 
-        self.attribute_map = {
-            'game_result': 'game_result'
-        }
+        self.attribute_map = {"game_result": "game_result"}
         self._game_result = game_result
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Body':
+    def from_dict(cls, dikt) -> "Body":
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -61,8 +58,9 @@ class Body(Model):
         allowed_values = ["won", "lost", "ragequit"]  # noqa: E501
         if game_result not in allowed_values:
             raise ValueError(
-                "Invalid value for `game_result` ({0}), must be one of {1}"
-                .format(game_result, allowed_values)
+                "Invalid value for `game_result` ({0}), must be one of {1}".format(
+                    game_result, allowed_values
+                )
             )
 
         self._game_result = game_result

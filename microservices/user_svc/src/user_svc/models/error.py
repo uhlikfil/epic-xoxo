@@ -15,16 +15,36 @@ class Error(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, reason: str = None):  # noqa: E501
+    def __init__(
+        self,
+        detail: str = None,
+        status: int = None,
+        title: str = None,
+        type: str = None,
+    ):  # noqa: E501
         """Error - a model defined in Swagger
 
-        :param reason: The reason of this Error.  # noqa: E501
-        :type reason: str
+        :param detail: The detail of this Error.  # noqa: E501
+        :type detail: str
+        :param status: The status of this Error.  # noqa: E501
+        :type status: int
+        :param title: The title of this Error.  # noqa: E501
+        :type title: str
+        :param type: The type of this Error.  # noqa: E501
+        :type type: str
         """
-        self.swagger_types = {"reason": str}
+        self.swagger_types = {"detail": str, "status": int, "title": str, "type": str}
 
-        self.attribute_map = {"reason": "reason"}
-        self._reason = reason
+        self.attribute_map = {
+            "detail": "detail",
+            "status": "status",
+            "title": "title",
+            "type": "type",
+        }
+        self._detail = detail
+        self._status = status
+        self._title = title
+        self._type = type
 
     @classmethod
     def from_dict(cls, dikt) -> "Error":
@@ -38,22 +58,85 @@ class Error(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def reason(self) -> str:
-        """Gets the reason of this Error.
+    def detail(self) -> str:
+        """Gets the detail of this Error.
 
 
-        :return: The reason of this Error.
+        :return: The detail of this Error.
         :rtype: str
         """
-        return self._reason
+        return self._detail
 
-    @reason.setter
-    def reason(self, reason: str):
-        """Sets the reason of this Error.
+    @detail.setter
+    def detail(self, detail: str):
+        """Sets the detail of this Error.
 
 
-        :param reason: The reason of this Error.
-        :type reason: str
+        :param detail: The detail of this Error.
+        :type detail: str
         """
 
-        self._reason = reason
+        self._detail = detail
+
+    @property
+    def status(self) -> int:
+        """Gets the status of this Error.
+
+
+        :return: The status of this Error.
+        :rtype: int
+        """
+        return self._status
+
+    @status.setter
+    def status(self, status: int):
+        """Sets the status of this Error.
+
+
+        :param status: The status of this Error.
+        :type status: int
+        """
+
+        self._status = status
+
+    @property
+    def title(self) -> str:
+        """Gets the title of this Error.
+
+
+        :return: The title of this Error.
+        :rtype: str
+        """
+        return self._title
+
+    @title.setter
+    def title(self, title: str):
+        """Sets the title of this Error.
+
+
+        :param title: The title of this Error.
+        :type title: str
+        """
+
+        self._title = title
+
+    @property
+    def type(self) -> str:
+        """Gets the type of this Error.
+
+
+        :return: The type of this Error.
+        :rtype: str
+        """
+        return self._type
+
+    @type.setter
+    def type(self, type: str):
+        """Sets the type of this Error.
+
+
+        :param type: The type of this Error.
+        :type type: str
+        """
+
+        self._type = type

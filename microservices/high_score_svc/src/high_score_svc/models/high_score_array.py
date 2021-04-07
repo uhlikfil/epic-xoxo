@@ -15,18 +15,15 @@ class HighScoreArray(Model):
 
     Do not edit the class manually.
     """
+
     def __init__(self):  # noqa: E501
-        """HighScoreArray - a model defined in Swagger
+        """HighScoreArray - a model defined in Swagger"""
+        self.swagger_types = {}
 
-        """
-        self.swagger_types = {
-        }
-
-        self.attribute_map = {
-        }
+        self.attribute_map = {}
 
     @classmethod
-    def from_dict(cls, dikt) -> 'HighScoreArray':
+    def from_dict(cls, dikt) -> "HighScoreArray":
         """Returns the dict as a model
 
         :param dikt: A dict.

@@ -43,13 +43,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/HighScore'
         "400":
-          description: Invalid username supplied
+          description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         "404":
           description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "422":
+          description: Invalid username supplied
           content:
             application/json:
               schema:
@@ -84,6 +90,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/HighScore'
         "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "422":
           description: Invalid username supplied
           content:
             application/json:
@@ -120,7 +132,13 @@ components:
     Error:
       type: object
       properties:
-        reason:
+        detail:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
           type: string
       description: Error response
     body:
