@@ -144,6 +144,12 @@ components:
         player2Id:
           description: The other player (i.e. not the host)
           type: string
+        winnerId:
+          description: ID of the winner of the match
+          type: string
+        startingId:
+          description: ID of the player that started the game
+          type: string
         rounds:
           description: How many rounds the match took
           type: integer
