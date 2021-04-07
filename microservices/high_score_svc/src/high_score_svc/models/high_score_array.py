@@ -16,11 +16,16 @@ class HighScoreArray(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self):  # noqa: E501
-        """HighScoreArray - a model defined in Swagger"""
-        self.swagger_types = {}
+    def __init__(self, high_scores: List[HighScore] = None):  # noqa: E501
+        """HighScoreArray - a model defined in Swagger
 
-        self.attribute_map = {}
+        :param high_scores: The high_scores of this HighScoreArray.  # noqa: E501
+        :type high_scores: List[HighScore]
+        """
+        self.swagger_types = {"high_scores": List[HighScore]}
+
+        self.attribute_map = {"high_scores": "high_scores"}
+        self._high_scores = high_scores
 
     @classmethod
     def from_dict(cls, dikt) -> "HighScoreArray":
@@ -32,3 +37,24 @@ class HighScoreArray(Model):
         :rtype: HighScoreArray
         """
         return util.deserialize_model(dikt, cls)
+
+    @property
+    def high_scores(self) -> List[HighScore]:
+        """Gets the high_scores of this HighScoreArray.
+
+
+        :return: The high_scores of this HighScoreArray.
+        :rtype: List[HighScore]
+        """
+        return self._high_scores
+
+    @high_scores.setter
+    def high_scores(self, high_scores: List[HighScore]):
+        """Sets the high_scores of this HighScoreArray.
+
+
+        :param high_scores: The high_scores of this HighScoreArray.
+        :type high_scores: List[HighScore]
+        """
+
+        self._high_scores = high_scores

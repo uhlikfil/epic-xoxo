@@ -81,12 +81,8 @@ paths:
                   enum: [won, lost, ragequit]
         required: true
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HighScore'
+        '204':
+          description: Successful operation
         '400':
           description: Bad request
           content:
@@ -113,10 +109,17 @@ components:
           type: integer
         ragequits:
           type: integer
+        winrate:
+          type: number
+          readOnly: true
         rank:
           type: integer
+          readOnly: true     
     HighScoreArray:
       description: array of high scores
-      type: array
-      items:
-        $ref: '#/components/schemas/HighScore'
+      type: object
+      properties:
+        high_scores:
+          type: array
+          items:
+            $ref: '#/components/schemas/HighScore'

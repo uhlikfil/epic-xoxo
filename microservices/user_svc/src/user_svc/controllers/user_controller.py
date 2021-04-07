@@ -1,6 +1,3 @@
-import re
-
-import connexion
 import user_svc.database.db_access as db
 import user_svc.validators as valid
 from user_svc.models.body import Body  # noqa: E501
@@ -101,7 +98,7 @@ def update_user(body, username):  # noqa: E501
     """
     if not valid.is_valid_username(username):
         __err_invalid_data()
-    body = Body.from_dict(connexion.request.get_json())  # noqa: E501
+    body = Body.from_dict(body)  # noqa: E501
     if not valid.is_valid_ip_address(body.ip):
         __err_invalid_data()
     if not db.update_user(username, body.ip):

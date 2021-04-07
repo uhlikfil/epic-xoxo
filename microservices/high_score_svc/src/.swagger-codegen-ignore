@@ -11,5 +11,5 @@ setup.py
 **/*
 !high_score_svc/models/**
 !high_score_svc/swagger/**
-!high_score_svc/controllers/**
-!high_score_svc/test/**
+#!high_score_svc/controllers/**
+#!high_score_svc/test/**

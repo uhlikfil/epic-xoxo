@@ -3,14 +3,14 @@ version: "3.7"
 services:
   high_score_db:
     image: mysql
-    container_name: high_score_db_container
+    container_name: swa_high_score_db
     env_file: .env
     volumes:
       - ./database:/docker-entrypoint-initdb.d
       - db_data:/var/lib/mysql
 
   app:
-    container_name: high_score_svc_container
+    container_name: swa_high_score_svc
     depends_on:
       - high_score_db
     env_file: .env
@@ -22,7 +22,7 @@ services:
   #### FOR DEBUGGING PURPOSES ####
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: high_score_phpadmin_container
+    container_name: high_score_phpadmin
     depends_on:
       - high_score_db
     environment:
@@ -30,7 +30,7 @@ services:
     links:
       - high_score_db:high_score_db
     ports:
-      - 8080:80
+      - 8083:80
   ################################
 
 volumes:

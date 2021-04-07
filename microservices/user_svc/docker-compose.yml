@@ -3,14 +3,14 @@ version: "3.7"
 services:
   user_db:
     image: mysql
-    container_name: user_db_container
+    container_name: swa_user_db
     env_file: .env
     volumes:
       - ./database:/docker-entrypoint-initdb.d
       - db_data:/var/lib/mysql
 
   app:
-    container_name: user_svc_container
+    container_name: swa_user_svc
     depends_on:
       - user_db
     env_file: .env
@@ -22,7 +22,7 @@ services:
   #### FOR DEBUGGING PURPOSES ####
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: user_phpadmin_container
+    container_name: swa_user_phpadmin
     depends_on:
       - user_db
     environment:
@@ -30,7 +30,7 @@ services:
     links:
       - user_db:user_db
     ports:
-      - 8080:80
+      - 8081:80
   ################################
 
 volumes:
