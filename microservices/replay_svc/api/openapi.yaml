@@ -145,52 +145,6 @@ paths:
       x-swagger-router-controller: Replay
 components:
   schemas:
-    Replay:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        player1Id:
-          type: integer
-          description: The host of the match
-          format: int64
-        player2Id:
-          type: integer
-          description: The other player (i.e. not the host)
-          format: int64
-        winner:
-          type: integer
-          description: ID of the winner
-          format: int64
-        rounds:
-          type: integer
-          description: How many rounds the match took
-          format: int64
-        date:
-          type: string
-          format: date-time
-        completed:
-          type: boolean
-          description: Whether the game finished as expected (`true`) or the opponent
-            has left the game (`false`)
-        plays:
-          maxItems: 2
-          minItems: 2
-          type: array
-          items:
-            type: integer
-      example:
-        date: 2000-01-23T04:56:07.000+00:00
-        player1Id: 6
-        winner: 5
-        plays:
-        - 2
-        - 2
-        player2Id: 1
-        id: 0
-        completed: true
-        rounds: 5
     ReplayShort:
       type: object
       properties:
@@ -198,31 +152,56 @@ components:
           type: integer
           format: int64
         player1Id:
-          type: integer
+          type: string
           description: The host of the match
-          format: int64
         player2Id:
-          type: integer
+          type: string
           description: The other player (i.e. not the host)
-          format: int64
+        winnerId:
+          type: string
+          description: ID of the winner of the match
+        startingId:
+          type: string
+          description: ID of the player that started the game
         rounds:
           type: integer
           description: How many rounds the match took
           format: int64
         date:
-          type: string
-          format: date-time
+          type: integer
         completed:
           type: boolean
-          description: Whether the game finished as expected (`true`) or the opponent
-            has left the game (`false`)
+          description: "Is `true` if the game ended properly, `false` if the opponent\
+            \ ragequit."
       example:
-        date: 2000-01-23T04:56:07.000+00:00
-        player1Id: 6
-        player2Id: 1
+        date: 1
+        player1Id: player1Id
+        player2Id: player2Id
+        winnerId: winnerId
         id: 0
         completed: true
-        rounds: 5
+        startingId: startingId
+        rounds: 6
+    Replay:
+      type: object
+      properties:
+        plays:
+          type: array
+          items:
+            type: array
+            items:
+              maxItems: 2
+              minItems: 2
+              type: integer
+      example:
+        plays:
+        - - 0
+          - 0
+        - - 0
+          - 0
+      allOf:
+      - $ref: '#/components/schemas/ReplayShort'
+      - type: object
     ReplayArray:
       type: array
       items:
@@ -256,11 +235,9 @@ components:
       type: object
       properties:
         before:
-          type: string
-          format: date-time
+          type: integer
         after:
-          type: string
-          format: date-time
+          type: integer
     ReplayFilter_rounds:
       type: object
       properties:

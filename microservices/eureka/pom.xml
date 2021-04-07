@@ -56,11 +56,10 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile-maven-version}</version>
+                <version>1.4.9</version>
                 <executions>
                     <execution>
                         <id>default</id>
@@ -71,14 +70,13 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>spotify/foobar</repository>
-                    <tag>${project.version}</tag>
+                    <repository>swa/eureka</repository>
+                    <tag>latest</tag>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
