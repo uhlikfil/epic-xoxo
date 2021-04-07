@@ -4,25 +4,21 @@ import connexion
 import user_svc.database.db_access as db
 import user_svc.validators as valid
 from user_svc.models.body import Body  # noqa: E501
-from user_svc.models.error import Error
 from user_svc.models.user import User  # noqa: E501
 from user_svc.models.user_detail import UserDetail  # noqa: E501
-
-
-def __err(msg: str, status: int):
-    return Error(msg), status
+from werkzeug.exceptions import Conflict, NotFound, UnprocessableEntity
 
 
 def __err_invalid_data():
-    return __err("Invalid data supplied", 400)
+    raise UnprocessableEntity("Invalid data supplied")
 
 
 def __err_already_exists():
-    return __err("User already exists", 409)
+    raise Conflict("User already exists")
 
 
 def __err_not_found():
-    return __err("User not found", 404)
+    raise NotFound("User not found")
 
 
 def create_user(body):  # noqa: E501
@@ -37,9 +33,9 @@ def create_user(body):  # noqa: E501
     """
     user = User.from_dict(body)  # noqa: E501
     if not valid.check_user(user):
-        return __err_invalid_data()
+        __err_invalid_data()
     if not db.insert_user(user):
-        return __err_already_exists()
+        __err_already_exists()
     return get_user_by_username(user.username)
 
 
@@ -54,9 +50,9 @@ def delete_user(username):  # noqa: E501
     :rtype: None
     """
     if not valid.is_valid_username(username):
-        return __err_invalid_data()
+        __err_invalid_data()
     if not db.delete_user(username):
-        return __err_not_found()
+        __err_not_found()
     return "", 204
 
 
@@ -71,10 +67,10 @@ def get_user_by_username(username):  # noqa: E501
     :rtype: User
     """
     if not valid.is_valid_username(username):
-        return __err_invalid_data()
+        __err_invalid_data()
     user_data = db.get_user(username)
     if not user_data:
-        return __err_not_found()
+        __err_not_found()
     return User(*user_data)
 
 
@@ -104,10 +100,10 @@ def update_user(body, username):  # noqa: E501
     :rtype: User
     """
     if not valid.is_valid_username(username):
-        return __err_invalid_data()
+        __err_invalid_data()
     body = Body.from_dict(connexion.request.get_json())  # noqa: E501
     if not valid.is_valid_ip_address(body.ip):
-        return __err_invalid_data()
+        __err_invalid_data()
     if not db.update_user(username, body.ip):
-        return __err_not_found()
+        __err_not_found()
     return get_user_by_username(username)

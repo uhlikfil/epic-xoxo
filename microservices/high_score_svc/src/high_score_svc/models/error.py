@@ -5,8 +5,8 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from user_svc.models.base_model_ import Model
-from user_svc import util
+from high_score_svc.models.base_model_ import Model
+from high_score_svc import util
 
 
 class Error(Model):

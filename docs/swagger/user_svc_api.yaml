@@ -27,13 +27,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '400':
-          description: Invalid user supplied
+          description: Bad request
           content:
             application/json:
               schema:
                 $ref: 'common_components.yaml#/components/schemas/Error'
         '409':
           description: User already exists
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
+        '422':
+          description: Invalid user supplied
           content:
             application/json:
               schema:
@@ -59,13 +65,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '400':
-          description: Invalid username supplied
+          description: Bad request
           content:
             application/json:
               schema:
                 $ref: 'common_components.yaml#/components/schemas/Error'
         '404':
           description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
+        '422':
+          description: Invalid username supplied
           content:
             application/json:
               schema:
@@ -102,13 +114,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '400':
-          description: Invalid data supplied
+          description: Bad request
           content:
             application/json:
               schema:
                 $ref: 'common_components.yaml#/components/schemas/Error'
         '404':
           description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
+        '422':
+          description: Invalid data supplied
           content:
             application/json:
               schema:
@@ -129,13 +147,19 @@ paths:
         '204':
           description: User deleted successfully
         '400':
-          description: Invalid username supplied
+          description: Bad request
           content:
             application/json:
               schema:
                 $ref: 'common_components.yaml#/components/schemas/Error'
         '404':
           description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
+        '422':
+          description: Invalid username supplied
           content:
             application/json:
               schema:
@@ -161,13 +185,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserDetail'
         '400':
-          description: Invalid username supplied
+          description: Bad request
           content:
             application/json:
               schema:
                 $ref: 'common_components.yaml#/components/schemas/Error'
         '404':
           description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: 'common_components.yaml#/components/schemas/Error'
+        '422':
+          description: Invalid username supplied
           content:
             application/json:
               schema:

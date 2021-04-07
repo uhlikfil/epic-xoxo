@@ -4,5 +4,11 @@ components:
       description: Error response
       type: object
       properties:
-        reason:
+        detail:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
           type: string

@@ -1,0 +1,1 @@
+from high_score_svc.validators.user import is_valid_username

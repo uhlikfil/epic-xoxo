@@ -4,105 +4,107 @@ info:
   description: Microservice API for High Score
   version: 1.0-oas3
 servers:
-  - url: 'http://localhost:8003/api/v1'
+- url: http://localhost:8003/api/v1
 paths:
   /high_score:
     get:
       tags:
-        - high_score
+      - high_score
       summary: Get the top 10 users
       operationId: get_high_score_top
       responses:
-        '200':
+        "200":
           description: Top 10 users returned
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HighScoreArray'
-  '/high_score/{username}':
+      x-openapi-router-controller: high_score_svc.controllers.high_score_controller
+  /high_score/{username}:
     get:
       tags:
-        - high_score
+      - high_score
       summary: Get the ranking of the desired user
       operationId: get_user_high_score
       parameters:
-        - name: username
-          in: path
-          description: The username that needs to be fetched
-          required: true
-          schema:
-            type: string
+      - name: username
+        in: path
+        description: The username that needs to be fetched
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Top 10 users returned
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HighScore'
-        '400':
+        "400":
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: 'common_components.yaml#/components/schemas/Error'
-        '404':
+                $ref: '#/components/schemas/Error'
+        "404":
           description: User not found
           content:
             application/json:
               schema:
-                $ref: 'common_components.yaml#/components/schemas/Error'
-        '422':
+                $ref: '#/components/schemas/Error'
+        "422":
           description: Invalid username supplied
           content:
             application/json:
               schema:
-                $ref: 'common_components.yaml#/components/schemas/Error'
+                $ref: '#/components/schemas/Error'
+      x-openapi-router-controller: high_score_svc.controllers.high_score_controller
     post:
       tags:
-        - high_score
+      - high_score
       summary: Increment the win/loss/ragequit count for the desired user
       operationId: post_high_score_update
       parameters:
-        - name: username
-          in: path
-          description: The username that needs to be updated
-          required: true
-          schema:
-            type: string
+      - name: username
+        in: path
+        description: The username that needs to be updated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       requestBody:
-        description: Whether the user has won, lost or ragequit
+        description: "Whether the user has won, lost or ragequit"
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                game_result:
-                  type: string
-                  enum: [won, lost, ragequit]
+              $ref: '#/components/schemas/body'
         required: true
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HighScore'
-        '400':
+        "400":
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: 'common_components.yaml#/components/schemas/Error'
-        '422':
+                $ref: '#/components/schemas/Error'
+        "422":
           description: Invalid username supplied
           content:
             application/json:
               schema:
-                $ref: 'common_components.yaml#/components/schemas/Error'
+                $ref: '#/components/schemas/Error'
+      x-openapi-router-controller: high_score_svc.controllers.high_score_controller
 components:
   schemas:
     HighScore:
-      description: high score object
       type: object
       properties:
         username:
@@ -115,8 +117,37 @@ components:
           type: integer
         rank:
           type: integer
+      description: high score object
+      example:
+        wins: 0
+        ragequits: 1
+        loses: 6
+        rank: 5
+        username: username
     HighScoreArray:
-      description: array of high scores
       type: array
+      description: array of high scores
       items:
         $ref: '#/components/schemas/HighScore'
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+      description: Error response
+    body:
+      type: object
+      properties:
+        game_result:
+          type: string
+          enum:
+          - won
+          - lost
+          - ragequit
+
