@@ -1,0 +1,15 @@
+.gitignore
+.dockerignore
+requirements.txt
+test-requirements.txt
+tox.ini
+Dockerfile
+.travis.yml
+git_push.sh
+README.md
+setup.py
+**/*
+!high_score_svc/models/**
+!high_score_svc/swagger/**
+!high_score_svc/controllers/**
+!high_score_svc/test/**
