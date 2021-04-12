@@ -83,12 +83,8 @@ paths:
               $ref: '#/components/schemas/body'
         required: true
       responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HighScore'
+        "204":
+          description: Successful operation
         "400":
           description: Bad request
           content:
@@ -115,20 +111,42 @@ components:
           type: integer
         ragequits:
           type: integer
+        winrate:
+          type: number
+          readOnly: true
         rank:
           type: integer
+          readOnly: true
       description: high score object
       example:
         wins: 0
         ragequits: 1
         loses: 6
+        winrate: 5.962133916683182
         rank: 5
         username: username
     HighScoreArray:
-      type: array
+      type: object
+      properties:
+        high_scores:
+          type: array
+          items:
+            $ref: '#/components/schemas/HighScore'
       description: array of high scores
-      items:
-        $ref: '#/components/schemas/HighScore'
+      example:
+        high_scores:
+        - wins: 0
+          ragequits: 1
+          loses: 6
+          winrate: 5.962133916683182
+          rank: 5
+          username: username
+        - wins: 0
+          ragequits: 1
+          loses: 6
+          winrate: 5.962133916683182
+          rank: 5
+          username: username
     Error:
       type: object
       properties:
