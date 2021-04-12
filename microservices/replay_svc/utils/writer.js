@@ -16,6 +16,12 @@ var writeJson = exports.writeJson = function(response, arg1, arg2) {
     return;
   }
 
+  if (arg1 && Number.isInteger(arg1)) {
+    response.writeHead(arg1, {'Content-Type': 'application/json'});
+    response.end('{}');
+    return;
+  }
+
   if(arg2 && Number.isInteger(arg2)) {
     code = arg2;
   }

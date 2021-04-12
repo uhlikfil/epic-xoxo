@@ -1,0 +1,42 @@
+version: '3'
+services:
+  swa_replays:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: swa/replays/service
+    # Pro škálování je nutné nemít konkrétní jméno servicy
+    # container_name: nodejs
+    env_file: .env
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/usr/app/
+#      - /usr/app/node_modules
+    command: node /usr/app/index.js
+  postgres:
+    image: postgres
+    container_name: swa_replays_postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - swa_replays_postgres_volume:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    env_file:
+      - ./.env
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: swa_replays_pgadmin
+    depends_on:
+      - postgres
+    ports:
+      - "8001:80"
+    env_file:
+      - ./.env
+    volumes:
+      - /var/lib/pgadmin
+volumes:
+  swa_replays_postgres_volume:
+    name: swa_replays_postgres_volume

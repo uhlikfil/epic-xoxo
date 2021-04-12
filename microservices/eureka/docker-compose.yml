@@ -3,11 +3,13 @@ services:
   swa_eureka:
     image: 'swa/eureka'
     container_name: swa_eureka
+    env_file:
+      - ./.env
     restart: always
     volumes:
       - /opt/workspace/nerdcode/docker/data/logs:/logs:rw
     ports:
-      - "8761:8761"
+      - "${PORT_OUT}:8761"
     mem_limit: 512m
     mem_reservation: 256m
 #    networks:

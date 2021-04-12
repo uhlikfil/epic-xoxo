@@ -6,15 +6,15 @@ info:
     email: neuvimat@fel.cvut.cz
   version: 1.0.0
 servers:
-- url: http://localhost/api/v3
+  - url: http://localhost/api/v3
 tags:
-- name: replay
-  description: Sum stuff 'bout 'em replayz
+  - name: replay
+    description: Sum stuff 'bout 'em replayz
 paths:
   /replay:
     put:
       tags:
-      - replay
+        - replay
       summary: Update an existing replay
       operationId: update_replay
       requestBody:
@@ -38,7 +38,7 @@ paths:
       x-swagger-router-controller: Replay
     post:
       tags:
-      - replay
+        - replay
       summary: Add a new replay to the store
       operationId: add_replay
       requestBody:
@@ -62,7 +62,7 @@ paths:
   /replay/filter:
     post:
       tags:
-      - replay
+        - replay
       summary: Search across all the replays
       description: "Filters through replays based on supplied filters. Returns abridged\
         \ version of replays, where the specific turns (field `plays`) are not listed\
@@ -89,20 +89,20 @@ paths:
   /replay/{replayId}:
     get:
       tags:
-      - replay
+        - replay
       summary: Get a replay by ID
       description: Returns a single replay by its ID
       operationId: get_replay_by_id
       parameters:
-      - name: replayId
-        in: path
-        description: ID of replay to return
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-          format: int64
+        - name: replayId
+          in: path
+          description: ID of replay to return
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: successful operation
@@ -119,19 +119,19 @@ paths:
       x-swagger-router-controller: Replay
     delete:
       tags:
-      - replay
+        - replay
       summary: Deletes a replay
       operationId: delete_replay
       parameters:
-      - name: replayId
-        in: path
-        description: Replay id to delete
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-          format: int64
+        - name: replayId
+          in: path
+          description: Replay id to delete
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: success
@@ -187,6 +187,8 @@ components:
       properties:
         plays:
           type: array
+          description: "Array of turns, each turn is an array of [position X, position\
+            \ Y]"
           items:
             type: array
             items:
@@ -195,13 +197,13 @@ components:
               type: integer
       example:
         plays:
-        - - 0
-          - 0
-        - - 0
-          - 0
+          - - 0
+            - 0
+          - - 0
+            - 0
       allOf:
-      - $ref: '#/components/schemas/ReplayShort'
-      - type: object
+        - $ref: '#/components/schemas/ReplayShort'
+        - type: object
     ReplayArray:
       type: array
       items:
@@ -210,13 +212,20 @@ components:
       type: object
       properties:
         player1Id:
-          type: integer
+          type: string
           description: The host of the match
-          format: int64
         player2Id:
-          type: integer
+          type: string
           description: The other player (i.e. not the host)
-          format: int64
+        winnerId:
+          type: string
+          description: Id of the winning player
+        startingId:
+          type: string
+          description: Id of the starting player
+        hasPlayerId:
+          type: string
+          description: These player Ids are in the match
         date:
           $ref: '#/components/schemas/ReplayFilter_date'
         completed:

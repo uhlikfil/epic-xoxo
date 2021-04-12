@@ -166,6 +166,7 @@ components:
         - type: object
       properties:
         plays:
+          description: 'Array of turns, each turn is an array of [position X, position Y]'
           type: array
           items:
             type: array
@@ -182,12 +183,19 @@ components:
       properties:
         player1Id:
           description: The host of the match
-          type: integer
-          format: int64
+          type: string
         player2Id:
           description: The other player (i.e. not the host)
-          type: integer
-          format: int64
+          type: string
+        winnerId:
+          description: Id of the winning player
+          type: string
+        startingId:
+          description: Id of the starting player
+          type: string
+        hasPlayerId:
+          description: These player Ids are in the match
+          type: string
         date:
           type: object
           properties:
