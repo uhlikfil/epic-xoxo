@@ -4,10 +4,12 @@ import os
 import connexion
 
 from user_svc import encoder
+from user_svc.eureka import eureka_client
 
 
 def main():
-    app = connexion.App(__name__, specification_dir="./swagger/")
+    eureka_client.register()
+    app = connexion.App(os.getenv("APP_NAME"), specification_dir="./swagger/")
     app.app.json_encoder = encoder.JSONEncoder
     app.add_api("swagger.yaml", arguments={"title": "Users"}, pythonic_params=True)
     app.run(port=os.getenv("APP_PORT"))

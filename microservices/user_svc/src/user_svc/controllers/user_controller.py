@@ -1,5 +1,6 @@
 import user_svc.database.db_access as db
 import user_svc.validators as valid
+from user_svc.eureka import eureka_client
 from user_svc.models.body import Body  # noqa: E501
 from user_svc.models.user import User  # noqa: E501
 from user_svc.models.user_detail import UserDetail  # noqa: E501
@@ -81,7 +82,9 @@ def get_userdetail(username):  # noqa: E501
 
     :rtype: UserDetail
     """
-    return "not yet implemented"
+    user = get_user_by_username(username)
+    hs = eureka_client.get_high_score(username)
+    return UserDetail(**user.to_dict(), high_score=hs)
 
 
 def update_user(body, username):  # noqa: E501

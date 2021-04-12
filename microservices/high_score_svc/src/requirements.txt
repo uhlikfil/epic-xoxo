@@ -2,3 +2,4 @@ connexion[swagger-ui] == 2.6.0
 python_dateutil == 2.6.0
 setuptools >= 21.0.0
 mysql-connector-python
+py_eureka_client
