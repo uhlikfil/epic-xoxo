@@ -5,7 +5,7 @@ from urllib.error import URLError
 import py_eureka_client.eureka_client as eureka_client
 from user_svc.models.high_score import HighScore
 
-EUREKA_SERVER = f'{os.getenv("EUREKA_SERVER")}:{os.getenv("EUREKA_PORT")}'
+EUREKA_SERVER = f'{os.getenv("EUREKA_HOST")}:{os.getenv("EUREKA_PORT")}'
 
 UNAVAILABLE = "Unavailable"
 UNAVAILABLE_HS = HighScore(

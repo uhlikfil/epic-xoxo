@@ -2,7 +2,7 @@ import os
 
 import py_eureka_client.eureka_client as eureka_client
 
-EUREKA_SERVER = f'{os.getenv("EUREKA_SERVER")}:{os.getenv("EUREKA_PORT")}'
+EUREKA_SERVER = f'{os.getenv("EUREKA_HOST")}:{os.getenv("EUREKA_PORT")}'
 
 
 def register():

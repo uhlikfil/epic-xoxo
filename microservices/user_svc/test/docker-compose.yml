@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  user_db:
+    image: mysql
+    container_name: swa_user_db
+    env_file: .env
+    volumes:
+      - ../database:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/mysql
+
+  app:
+    container_name: swa_user_svc
+    depends_on:
+      - user_db
+    env_file: .env
+    environment:
+      - SKIP_EUREKA=1
+    build: ..
+    command: python3 -m user_svc
+
+  sut:
+    container_name: swa_user_svc_test
+    depends_on:
+      - app
+    env_file: .env
+    build: .
+    command: ./wait-for-it.sh app:${APP_PORT} -- pytest user_svc_tests.py
+
+volumes:
+  db_data:
