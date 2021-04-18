@@ -17,6 +17,7 @@ for SVC in $(ls microservices); do
         RUN_TESTS_FILE="microservices/${SVC}/run_tests.sh"
         if [[ ! -e ${RUN_TESTS_FILE} ]]; then
             echo "${RUN_TESTS_TEMPLATE}" > ${RUN_TESTS_FILE}
+            chmod +x ${RUN_TESTS_FILE}
         fi
     else
         echo "skipping ${SVC} - not a service"

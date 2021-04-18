@@ -1,2 +1,2 @@
-echo "Javascripteri nemaj penis ale vaginu 8===D"
-exit 69
+echo "Python boys FTW"
+exit 0
