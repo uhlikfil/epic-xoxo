@@ -3,7 +3,7 @@ from user_svc.validators.ip import is_valid_ip_address
 
 
 def is_valid_username(username: str):
-    return len(username) <= 64
+    return username is not None and len(username) <= 64
 
 
 def check_user(user: User) -> bool:

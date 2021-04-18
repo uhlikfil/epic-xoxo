@@ -14,15 +14,7 @@ class User(Model):
 
     Do not edit the class manually.
     """
-
-    def __init__(
-        self,
-        username: str = None,
-        origin_ip: str = None,
-        last_ip: str = None,
-        created: int = None,
-        updated: int = None,
-    ):  # noqa: E501
+    def __init__(self, username: str=None, origin_ip: str=None, last_ip: str=None, created: int=None, updated: int=None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param username: The username of this User.  # noqa: E501
@@ -37,19 +29,19 @@ class User(Model):
         :type updated: int
         """
         self.swagger_types = {
-            "username": str,
-            "origin_ip": str,
-            "last_ip": str,
-            "created": int,
-            "updated": int,
+            'username': str,
+            'origin_ip': str,
+            'last_ip': str,
+            'created': int,
+            'updated': int
         }
 
         self.attribute_map = {
-            "username": "username",
-            "origin_ip": "origin_ip",
-            "last_ip": "last_ip",
-            "created": "created",
-            "updated": "updated",
+            'username': 'username',
+            'origin_ip': 'origin_ip',
+            'last_ip': 'last_ip',
+            'created': 'created',
+            'updated': 'updated'
         }
         self._username = username
         self._origin_ip = origin_ip
@@ -58,7 +50,7 @@ class User(Model):
         self._updated = updated
 
     @classmethod
-    def from_dict(cls, dikt) -> "User":
+    def from_dict(cls, dikt) -> 'User':
         """Returns the dict as a model
 
         :param dikt: A dict.

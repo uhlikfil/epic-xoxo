@@ -14,14 +14,7 @@ class Error(Model):
 
     Do not edit the class manually.
     """
-
-    def __init__(
-        self,
-        detail: str = None,
-        status: int = None,
-        title: str = None,
-        type: str = None,
-    ):  # noqa: E501
+    def __init__(self, detail: str=None, status: int=None, title: str=None, type: str=None):  # noqa: E501
         """Error - a model defined in Swagger
 
         :param detail: The detail of this Error.  # noqa: E501
@@ -33,13 +26,18 @@ class Error(Model):
         :param type: The type of this Error.  # noqa: E501
         :type type: str
         """
-        self.swagger_types = {"detail": str, "status": int, "title": str, "type": str}
+        self.swagger_types = {
+            'detail': str,
+            'status': int,
+            'title': str,
+            'type': str
+        }
 
         self.attribute_map = {
-            "detail": "detail",
-            "status": "status",
-            "title": "title",
-            "type": "type",
+            'detail': 'detail',
+            'status': 'status',
+            'title': 'title',
+            'type': 'type'
         }
         self._detail = detail
         self._status = status
@@ -47,7 +45,7 @@ class Error(Model):
         self._type = type
 
     @classmethod
-    def from_dict(cls, dikt) -> "Error":
+    def from_dict(cls, dikt) -> 'Error':
         """Returns the dict as a model
 
         :param dikt: A dict.

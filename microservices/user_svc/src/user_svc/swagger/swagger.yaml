@@ -67,12 +67,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         "404":
           description: User not found
           content:
@@ -255,7 +249,8 @@ components:
           wins: 6
           ragequits: 5
           loses: 1
-          rank: 5
+          winrate: 5.637376656633329
+          rank: 2
           username: username
       allOf:
       - $ref: '#/components/schemas/User'
@@ -297,14 +292,19 @@ components:
           type: integer
         ragequits:
           type: integer
+        winrate:
+          type: number
+          readOnly: true
         rank:
           type: integer
+          readOnly: true
       description: high score object
       example:
         wins: 6
         ragequits: 5
         loses: 1
-        rank: 5
+        winrate: 5.637376656633329
+        rank: 2
         username: username
     body:
       required:
