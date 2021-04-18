@@ -1,0 +1,18 @@
+name: "user_svc"
+
+on:
+  push:
+    paths:
+      - "microservices/user_svc/**"
+      - ".github/workflows/user_svc.yaml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Run tests
+        run: |-
+          cd microservices/user_svc
+          run_tests.sh

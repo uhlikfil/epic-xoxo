@@ -1,0 +1,18 @@
+name: "replay_svc"
+
+on:
+  push:
+    paths:
+      - "microservices/replay_svc/**"
+      - ".github/workflows/replay_svc.yaml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Run tests
+        run: |-
+          cd microservices/replay_svc
+          run_tests.sh
