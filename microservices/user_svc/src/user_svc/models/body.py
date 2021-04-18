@@ -14,23 +14,20 @@ class Body(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, ip: str=None):  # noqa: E501
+
+    def __init__(self, ip: str = None):  # noqa: E501
         """Body - a model defined in Swagger
 
         :param ip: The ip of this Body.  # noqa: E501
         :type ip: str
         """
-        self.swagger_types = {
-            'ip': str
-        }
+        self.swagger_types = {"ip": str}
 
-        self.attribute_map = {
-            'ip': 'ip'
-        }
+        self.attribute_map = {"ip": "ip"}
         self._ip = ip
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Body':
+    def from_dict(cls, dikt) -> "Body":
         """Returns the dict as a model
 
         :param dikt: A dict.

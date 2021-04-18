@@ -2,6 +2,7 @@
 
 # flake8: noqa
 from __future__ import absolute_import
+
 # import models into model package
 from user_svc.models.achievement import Achievement
 from user_svc.models.body import Body

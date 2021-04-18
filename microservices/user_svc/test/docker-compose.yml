@@ -25,7 +25,7 @@ services:
       - app
     env_file: .env
     build: .
-    command: ./wait-for-it.sh app:${APP_PORT} -- pytest
+    command: ./wait-for-it.sh app:${APP_PORT} -- ./wait-for-it.sh user_db:${MYSQL_TCP_PORT} -- pytest
 
 volumes:
   db_data:

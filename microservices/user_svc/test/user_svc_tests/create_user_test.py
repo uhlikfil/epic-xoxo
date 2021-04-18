@@ -4,12 +4,9 @@ from common import TESTED_URL
 
 URL = f"{TESTED_URL}/user"
 
+
 def create_user(name: str = "test", ip: str = "192.168.1.1"):
-    user = {
-        "username": name,
-        "origin_ip": ip,
-        "last_ip": ip
-    }
+    user = {"username": name, "origin_ip": ip, "last_ip": ip}
     return requests.post(URL, json=user)
 
 
@@ -52,7 +49,7 @@ def test_read_only_attributes():
         "username": "badboy",
         "origin_ip": "192.168.1.1",
         "last_ip": "192.168.1.1",
-        "created": 1
+        "created": 1,
     }
     resp = requests.post(URL, json=user)
     assert resp.status_code == 400

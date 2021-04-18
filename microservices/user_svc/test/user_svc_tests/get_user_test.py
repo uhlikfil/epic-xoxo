@@ -5,12 +5,13 @@ from create_user_test import create_user
 
 URL = f"{TESTED_URL}/user"
 
+
 def test_existing_user():
     username = "hello"
     create_user(username)
     resp = requests.get(f"{URL}/{username}")
     assert resp.status_code == 200
-    assert resp.json()["username"] == username    
+    assert resp.json()["username"] == username
 
 
 def test_non_existing_user():
