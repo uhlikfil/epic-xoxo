@@ -21,6 +21,7 @@ class HighScore(Model):
         wins: int = None,
         loses: int = None,
         ragequits: int = None,
+        winrate: float = None,
         rank: int = None,
     ):  # noqa: E501
         """HighScore - a model defined in Swagger
@@ -33,6 +34,8 @@ class HighScore(Model):
         :type loses: int
         :param ragequits: The ragequits of this HighScore.  # noqa: E501
         :type ragequits: int
+        :param winrate: The winrate of this HighScore.  # noqa: E501
+        :type winrate: float
         :param rank: The rank of this HighScore.  # noqa: E501
         :type rank: int
         """
@@ -41,6 +44,7 @@ class HighScore(Model):
             "wins": int,
             "loses": int,
             "ragequits": int,
+            "winrate": float,
             "rank": int,
         }
 
@@ -49,12 +53,14 @@ class HighScore(Model):
             "wins": "wins",
             "loses": "loses",
             "ragequits": "ragequits",
+            "winrate": "winrate",
             "rank": "rank",
         }
         self._username = username
         self._wins = wins
         self._loses = loses
         self._ragequits = ragequits
+        self._winrate = winrate
         self._rank = rank
 
     @classmethod
@@ -151,6 +157,27 @@ class HighScore(Model):
         """
 
         self._ragequits = ragequits
+
+    @property
+    def winrate(self) -> float:
+        """Gets the winrate of this HighScore.
+
+
+        :return: The winrate of this HighScore.
+        :rtype: float
+        """
+        return self._winrate
+
+    @winrate.setter
+    def winrate(self, winrate: float):
+        """Sets the winrate of this HighScore.
+
+
+        :param winrate: The winrate of this HighScore.
+        :type winrate: float
+        """
+
+        self._winrate = winrate
 
     @property
     def rank(self) -> int:

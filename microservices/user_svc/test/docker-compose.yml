@@ -3,14 +3,14 @@ version: "3.7"
 services:
   user_db:
     image: mysql
-    container_name: swa_user_db
+    container_name: swa_user_db_test
     env_file: .env
     volumes:
       - ../database:/docker-entrypoint-initdb.d
       - db_data:/var/lib/mysql
 
   app:
-    container_name: swa_user_svc
+    container_name: swa_user_svc_test
     depends_on:
       - user_db
     env_file: .env
@@ -20,12 +20,12 @@ services:
     command: python3 -m user_svc
 
   sut:
-    container_name: swa_user_svc_test
+    container_name: swa_user_svc_run_tests
     depends_on:
       - app
     env_file: .env
     build: .
-    command: ./wait-for-it.sh app:${APP_PORT} -- pytest user_svc_tests.py
+    command: ./wait-for-it.sh app:${APP_PORT} -- ./wait-for-it.sh user_db:${MYSQL_TCP_PORT} -- pytest
 
 volumes:
   db_data:

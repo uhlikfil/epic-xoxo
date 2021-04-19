@@ -64,12 +64,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: 'common_components.yaml#/components/schemas/Error'
         '404':
           description: User not found
           content:
