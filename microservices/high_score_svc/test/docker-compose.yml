@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  high_score_db:
+    image: mysql
+    container_name: swa_high_score_db
+    env_file: .env
+    volumes:
+      - ../database:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/mysql
+
+  app:
+    container_name: swa_high_score_svc
+    depends_on:
+      - high_score_db
+    env_file: .env
+    environment:
+      - SKIP_EUREKA=1
+    build: ..
+    command: python3 -m high_score_svc
+
+  sut:
+    container_name: swa_high_score_svc_run_tests
+    depends_on:
+      - app
+    env_file: .env
+    build: .
+    command: ./wait-for-it.sh app:${APP_PORT} -- ./wait-for-it.sh user_db:${MYSQL_TCP_PORT} -- pytest
+
+volumes:
+  db_data:
