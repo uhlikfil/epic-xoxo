@@ -57,44 +57,6 @@ paths:
             application/json:
               schema:
                 $ref: 'common_components.yaml#/components/schemas/Error'
-    post:
-      tags:
-        - high_score
-      summary: Increment the win/loss/ragequit count for the desired user
-      operationId: post_high_score_update
-      parameters:
-        - name: username
-          in: path
-          description: The username that needs to be updated
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Whether the user has won, lost or ragequit
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                game_result:
-                  type: string
-                  enum: [won, lost, ragequit]
-        required: true
-      responses:
-        '204':
-          description: Successful operation
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: 'common_components.yaml#/components/schemas/Error'
-        '422':
-          description: Invalid username supplied
-          content:
-            application/json:
-              schema:
-                $ref: 'common_components.yaml#/components/schemas/Error'
 components:
   schemas:
     HighScore:
@@ -123,3 +85,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/HighScore'
+    FinishedGame:
+      description: finished game to process from RabbitMQ - is here only for model codegen
+      $ref: 'common_components.yaml#/components/schemas/FinishedGameHighScore'

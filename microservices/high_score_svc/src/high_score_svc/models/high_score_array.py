@@ -15,20 +15,23 @@ class HighScoreArray(Model):
 
     Do not edit the class manually.
     """
-
-    def __init__(self, high_scores: List[HighScore] = None):  # noqa: E501
+    def __init__(self, high_scores: List[HighScore]=None):  # noqa: E501
         """HighScoreArray - a model defined in Swagger
 
         :param high_scores: The high_scores of this HighScoreArray.  # noqa: E501
         :type high_scores: List[HighScore]
         """
-        self.swagger_types = {"high_scores": List[HighScore]}
+        self.swagger_types = {
+            'high_scores': List[HighScore]
+        }
 
-        self.attribute_map = {"high_scores": "high_scores"}
+        self.attribute_map = {
+            'high_scores': 'high_scores'
+        }
         self._high_scores = high_scores
 
     @classmethod
-    def from_dict(cls, dikt) -> "HighScoreArray":
+    def from_dict(cls, dikt) -> 'HighScoreArray':
         """Returns the dict as a model
 
         :param dikt: A dict.

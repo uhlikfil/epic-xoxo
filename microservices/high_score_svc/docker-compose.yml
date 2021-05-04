@@ -17,7 +17,7 @@ services:
     ports:
       - ${APP_PORT_OUT}:${APP_PORT}
     build: .
-    command: python3 -m high_score_svc
+    command: python3 -u -m high_score_svc
 
   #### FOR DEBUGGING PURPOSES ####
   phpmyadmin:

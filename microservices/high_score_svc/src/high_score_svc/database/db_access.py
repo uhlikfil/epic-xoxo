@@ -2,13 +2,9 @@ import os
 from contextlib import contextmanager
 
 import mysql.connector as cn
-from high_score_svc.database.queries import (
-    INSERT,
-    SELECT_ONE,
-    SELECT_ONE_RANKED,
-    SELECT_TOP_RANKED,
-    UPDATE,
-)
+from high_score_svc.database.queries import (INSERT, SELECT_ONE,
+                                             SELECT_ONE_RANKED,
+                                             SELECT_TOP_RANKED, UPDATE)
 from high_score_svc.models.body import Body
 
 CONNECTION_CONFIG = {

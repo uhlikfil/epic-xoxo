@@ -12,3 +12,16 @@ components:
           type: string
         type:
           type: string
+    FinishedGameHighScore:
+      description: after game RabbitMQ entry for the High Score service to process
+      type: object
+      properties:
+        player1:
+          type: string
+        player2:
+          type: string
+        p1winner:
+          description: true if player1 won, false if player2 won
+          type: boolean
+        completed:
+          type: boolean
