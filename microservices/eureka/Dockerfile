@@ -1,7 +1,7 @@
-FROM openjdk:11-jre-slim
-VOLUME /tmp
-ADD target/*.jar app.jar
-ENV JAVA_OPTS "-Xmx192m -Xms192m -Djava.security.egd=file:///dev/./urandom -XX:+HeapDumpOnOutOfMemoryError "
-ENV TZ Africa/Johannesburg
-#DONT USE YET -XX:+UseG1GC
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar /app.jar" ]
+FROM maven:3.8.1-jdk-8 AS build
+COPY app /app
+WORKDIR /app
+RUN mvn clean package
+
+FROM openjdk:8-alpine
+COPY --from=build /app/target/eureka-server-1.jar /app/eureka-server-1.jar 
