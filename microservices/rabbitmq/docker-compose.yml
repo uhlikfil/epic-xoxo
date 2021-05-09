@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: swa_rabbitmq
+    env_file: .env
+    ports:
+        - ${APP_PORT_OUT}:${APP_PORT}
+        - ${UI_PORT_OUT}:${UI_PORT}
+    volumes:
+        - rabbit_mq_data:/var/lib/rabbitmq/
+
+  registerer:
+    container_name: swa_rabbitmq_registerer
+    env_file: .env
+    depends_on:
+      - rabbitmq
+    build: .
+    command: /reg/wait-for-it.sh rabbitmq:${APP_PORT} -- python3 -u /reg/register.py
+
+volumes:
+    rabbit_mq_data:

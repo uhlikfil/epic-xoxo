@@ -4,6 +4,7 @@ from user_svc.eureka import eureka_client
 from user_svc.models.body import Body  # noqa: E501
 from user_svc.models.user import User  # noqa: E501
 from user_svc.models.user_detail import UserDetail  # noqa: E501
+from user_svc.rabbitmq import publish_high_score_delete
 from werkzeug.exceptions import Conflict, NotFound, UnprocessableEntity
 
 
@@ -51,6 +52,7 @@ def delete_user(username):  # noqa: E501
         __err_invalid_data()
     if not db.delete_user(username):
         __err_not_found()
+    publish_high_score_delete(username)
     return "", 204
 
 

@@ -1,6 +1,5 @@
 import high_score_svc.database.db_access as db
 import high_score_svc.validators as valid
-from high_score_svc.models.body import Body  # noqa: E501
 from high_score_svc.models.high_score import HighScore  # noqa: E501
 from high_score_svc.models.high_score_array import HighScoreArray  # noqa: E501
 from werkzeug.exceptions import NotFound, UnprocessableEntity
@@ -41,25 +40,3 @@ def get_user_high_score(username):  # noqa: E501
     if not high_score_data:
         __err_not_found()
     return HighScore(*high_score_data)
-
-
-def post_high_score_update(body, username):  # noqa: E501
-    """Increment the win/loss/ragequit count for the desired user
-
-     # noqa: E501
-
-    :param body: Whether the user has won, lost or ragequit
-    :type body: dict | bytes
-    :param username: The username that needs to be updated
-    :type username: str
-
-    :rtype: HighScore
-    """
-    if not valid.is_valid_username(username):
-        __err_invalid_data()
-    body = Body.from_dict(body)  # noqa: E501
-    if db.get_high_score(username, False):
-        db.update_high_score(username, body)
-    else:
-        db.create_high_score(username, body)
-    return "", 204

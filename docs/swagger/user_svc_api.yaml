@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Users
+  title: User service
   description: Microservice API for user management
   version: 1.0-oas3
 servers:

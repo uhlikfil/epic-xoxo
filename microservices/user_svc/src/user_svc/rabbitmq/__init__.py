@@ -1,0 +1,1 @@
+from user_svc.rabbitmq.high_score_deletes_publisher import publish_high_score_delete

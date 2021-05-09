@@ -8,6 +8,8 @@ services:
     volumes:
       - ./database:/docker-entrypoint-initdb.d
       - db_data:/var/lib/mysql
+    cap_add:
+      - SYS_NICE
 
   app:
     container_name: swa_high_score_svc
@@ -17,7 +19,7 @@ services:
     ports:
       - ${APP_PORT_OUT}:${APP_PORT}
     build: .
-    command: python3 -m high_score_svc
+    command: python3 -u -m high_score_svc
 
   #### FOR DEBUGGING PURPOSES ####
   phpmyadmin:
