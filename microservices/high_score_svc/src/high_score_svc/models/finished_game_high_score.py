@@ -14,7 +14,14 @@ class FinishedGameHighScore(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, player1: str=None, player2: str=None, p1winner: bool=None, completed: bool=None):  # noqa: E501
+
+    def __init__(
+        self,
+        player1: str = None,
+        player2: str = None,
+        p1winner: bool = None,
+        completed: bool = None,
+    ):  # noqa: E501
         """FinishedGameHighScore - a model defined in Swagger
 
         :param player1: The player1 of this FinishedGameHighScore.  # noqa: E501
@@ -27,17 +34,17 @@ class FinishedGameHighScore(Model):
         :type completed: bool
         """
         self.swagger_types = {
-            'player1': str,
-            'player2': str,
-            'p1winner': bool,
-            'completed': bool
+            "player1": str,
+            "player2": str,
+            "p1winner": bool,
+            "completed": bool,
         }
 
         self.attribute_map = {
-            'player1': 'player1',
-            'player2': 'player2',
-            'p1winner': 'p1winner',
-            'completed': 'completed'
+            "player1": "player1",
+            "player2": "player2",
+            "p1winner": "p1winner",
+            "completed": "completed",
         }
         self._player1 = player1
         self._player2 = player2
@@ -45,7 +52,7 @@ class FinishedGameHighScore(Model):
         self._completed = completed
 
     @classmethod
-    def from_dict(cls, dikt) -> 'FinishedGameHighScore':
+    def from_dict(cls, dikt) -> "FinishedGameHighScore":
         """Returns the dict as a model
 
         :param dikt: A dict.

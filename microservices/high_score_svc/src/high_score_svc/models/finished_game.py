@@ -14,7 +14,14 @@ class FinishedGame(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, player1: str=None, player2: str=None, p1winner: bool=None, completed: bool=None):  # noqa: E501
+
+    def __init__(
+        self,
+        player1: str = None,
+        player2: str = None,
+        p1winner: bool = None,
+        completed: bool = None,
+    ):  # noqa: E501
         """FinishedGame - a model defined in Swagger
 
         :param player1: The player1 of this FinishedGame.  # noqa: E501
@@ -27,17 +34,17 @@ class FinishedGame(Model):
         :type completed: bool
         """
         self.swagger_types = {
-            'player1': str,
-            'player2': str,
-            'p1winner': bool,
-            'completed': bool
+            "player1": str,
+            "player2": str,
+            "p1winner": bool,
+            "completed": bool,
         }
 
         self.attribute_map = {
-            'player1': 'player1',
-            'player2': 'player2',
-            'p1winner': 'p1winner',
-            'completed': 'completed'
+            "player1": "player1",
+            "player2": "player2",
+            "p1winner": "p1winner",
+            "completed": "completed",
         }
         self._player1 = player1
         self._player2 = player2
@@ -45,7 +52,7 @@ class FinishedGame(Model):
         self._completed = completed
 
     @classmethod
-    def from_dict(cls, dikt) -> 'FinishedGame':
+    def from_dict(cls, dikt) -> "FinishedGame":
         """Returns the dict as a model
 
         :param dikt: A dict.

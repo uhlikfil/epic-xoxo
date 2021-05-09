@@ -3,7 +3,10 @@ from contextlib import contextmanager
 
 import mysql.connector as cn
 from user_svc.database.queries import DELETE, INSERT, SELECT, UPDATE
+from user_svc.logger import PrintLogger
 from user_svc.models import User
+
+LOGGER = PrintLogger("DB_ACCESS")
 
 CONNECTION_CONFIG = {
     "host": "user_db",
@@ -25,6 +28,7 @@ def get_connection():
 
 
 def get_user(username: str) -> tuple:
+    LOGGER.log(f"Getting user {username}")
     with get_connection() as cnx:
         with cnx.cursor() as cursor:
             cursor.execute(SELECT, (username,))
@@ -32,6 +36,7 @@ def get_user(username: str) -> tuple:
 
 
 def insert_user(user: User) -> bool:
+    LOGGER.log(f"Creating a new user {user}")
     with get_connection() as cnx:
         with cnx.cursor() as cursor:
             try:
@@ -42,6 +47,7 @@ def insert_user(user: User) -> bool:
 
 
 def delete_user(username: str) -> bool:
+    LOGGER.log(f"Deleting user {username}")
     with get_connection() as cnx:
         with cnx.cursor() as cursor:
             cursor.execute(DELETE, (username,))
@@ -49,6 +55,7 @@ def delete_user(username: str) -> bool:
 
 
 def update_user(username: str, new_ip: str) -> bool:
+    LOGGER.log(f"Updating user {username} with IP {new_ip}")
     with get_connection() as cnx:
         with cnx.cursor() as cursor:
             cursor.execute(UPDATE, (new_ip, username))

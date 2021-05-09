@@ -1,6 +1,5 @@
 import high_score_svc.database.db_access as db
 import high_score_svc.validators as valid
-from high_score_svc.models.body import Body  # noqa: E501
 from high_score_svc.models.high_score import HighScore  # noqa: E501
 from high_score_svc.models.high_score_array import HighScoreArray  # noqa: E501
 from werkzeug.exceptions import NotFound, UnprocessableEntity

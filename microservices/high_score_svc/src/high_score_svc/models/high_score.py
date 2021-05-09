@@ -14,7 +14,16 @@ class HighScore(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, username: str=None, wins: int=None, loses: int=None, ragequits: int=None, winrate: float=None, rank: int=None):  # noqa: E501
+
+    def __init__(
+        self,
+        username: str = None,
+        wins: int = None,
+        loses: int = None,
+        ragequits: int = None,
+        winrate: float = None,
+        rank: int = None,
+    ):  # noqa: E501
         """HighScore - a model defined in Swagger
 
         :param username: The username of this HighScore.  # noqa: E501
@@ -31,21 +40,21 @@ class HighScore(Model):
         :type rank: int
         """
         self.swagger_types = {
-            'username': str,
-            'wins': int,
-            'loses': int,
-            'ragequits': int,
-            'winrate': float,
-            'rank': int
+            "username": str,
+            "wins": int,
+            "loses": int,
+            "ragequits": int,
+            "winrate": float,
+            "rank": int,
         }
 
         self.attribute_map = {
-            'username': 'username',
-            'wins': 'wins',
-            'loses': 'loses',
-            'ragequits': 'ragequits',
-            'winrate': 'winrate',
-            'rank': 'rank'
+            "username": "username",
+            "wins": "wins",
+            "loses": "loses",
+            "ragequits": "ragequits",
+            "winrate": "winrate",
+            "rank": "rank",
         }
         self._username = username
         self._wins = wins
@@ -55,7 +64,7 @@ class HighScore(Model):
         self._rank = rank
 
     @classmethod
-    def from_dict(cls, dikt) -> 'HighScore':
+    def from_dict(cls, dikt) -> "HighScore":
         """Returns the dict as a model
 
         :param dikt: A dict.

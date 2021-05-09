@@ -4,7 +4,7 @@ import time
 import py_eureka_client.eureka_client as eureka_client
 
 EUREKA_SERVER = f'{os.getenv("EUREKA_HOST")}:{os.getenv("EUREKA_PORT")}'
-HEARTBEAT_INTERVAL = 20 # seconds
+HEARTBEAT_INTERVAL = 20  # seconds
 
 
 def register():
@@ -22,7 +22,7 @@ def ping_app() -> int:
 
 def keepalive():
     register()
-    while (ping_app() == 0):
+    while ping_app() == 0:
         print("rabbit is alive and well")
         time.sleep(HEARTBEAT_INTERVAL)
     print("rabbit is dieded, i'm dying too")
