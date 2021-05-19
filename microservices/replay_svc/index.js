@@ -4,7 +4,7 @@ let path = require('path');
 let http = require('http');
 
 let oas3Tools = require('oas3-tools');
-let serverPort = 8080;
+let serverPort = process.env.ENDPOINT_PORT || 8081;
 
 // swaggerRouter configuration
 let options = {
@@ -20,5 +20,14 @@ let app = expressAppConfig.getApp();
 http.createServer(app).listen(serverPort, function () {
     console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
     console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
+
+    const eureka = require('./eureka/eureka');
+    eureka.start((error, stuff) => {
+        if (error) {console.log('Error registering with eureka:', error);}
+        else {
+            console.log('Successfully connected to Eureka!');
+            console.log(eureka.getInstancesByAppId('GAME_SERVICE'));
+        }
+    })
 });
 

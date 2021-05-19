@@ -5,4 +5,4 @@ services:
     build: .
     ports: 
       - 8761:8761
-    command: "java -jar /app/eureka-server-1.jar"
+    command: "java -jar /app/eureka-server-1.jar eureka.server.enableSelfPreservation=false"

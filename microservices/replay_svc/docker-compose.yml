@@ -11,7 +11,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "8080:8080"
+      - "${ENDPOINT_PORT}:${ENDPOINT_PORT}"
     volumes:
       - .:/usr/app/
 #      - /usr/app/node_modules
