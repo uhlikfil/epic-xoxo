@@ -94,6 +94,7 @@ exports.filter_replays = function (body) {
                 sql += ' where '
             }
             sql += wheres.join(' AND ')
+            sql += ' ORDER BY date DESC';
             db.customQuery(sql, values)
                 .then((value) => {
                     resolve(value.rows)

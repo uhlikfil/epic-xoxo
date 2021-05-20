@@ -18,6 +18,5 @@ services:
       - rabbitmq
     build: .
     command: /reg/wait-for-it.sh rabbitmq:${APP_PORT} -- python3 -u /reg/register.py
-
 volumes:
     rabbit_mq_data:

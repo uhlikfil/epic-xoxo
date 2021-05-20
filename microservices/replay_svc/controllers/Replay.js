@@ -19,7 +19,7 @@ module.exports.delete_replay = function delete_replay(req, res, next, replayId, 
             utils.writeJson(res, response);
         })
         .catch(function (response) {
-            utils.writeJson(res, response);
+            utils.writeJson(res, response, 400);
         });
 };
 

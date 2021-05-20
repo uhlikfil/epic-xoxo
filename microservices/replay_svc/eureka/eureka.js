@@ -7,16 +7,12 @@ const service_name = process.env.SERVICE_NAME || 'game_service'
 const service_hostName = process.env.SERVICE_HOSTNAME || 'localhost'
 const service_port = process.env.SERVICE_PORT || process.env.ENDPOINT_PORT || 8081
 
-console.log(service_name);
-console.log(service_hostName);
-console.log(service_port);
-
 // example configuration
 const client = new Eureka({
     // application instance information
     instance: {
         app: service_name,
-        hostName: service_hostName,
+        hostName: service_hostName + ':' + service_port,
         ipAddr: '127.0.0.1',
         port: {
             '$': service_port,

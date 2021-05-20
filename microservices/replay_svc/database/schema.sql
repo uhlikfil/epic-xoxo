@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS replays (
-    id INTEGER primary key,
+    id SERIAL primary key,
     player1Id VARCHAR(64),
     player2Id VARCHAR(64),
     winnerId VARCHAR(64),

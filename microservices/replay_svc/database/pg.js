@@ -26,7 +26,7 @@ function createDefaults() {
 const {Pool} = require('pg')
 
 const FIND_BY_ID = 'select * from replays where id=$1'
-const INSERT = 'insert into replays VALUES ($1, $2, $3, $4, $5, $6, $7, $8)'
+const INSERT = 'insert into replays(player1id, player2id, winnerid, startingid, rounds, "date", completed, plays) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)'
 const UPDATE = 'update replays set player1id=$1, player2id=$2, winnerid=$3, startingid=$4, rounds=$5, date=$6, completed=$7, plays=$8 where id=$9'
 const DELETE = 'delete from replays where id=$1'
 

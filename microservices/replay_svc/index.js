@@ -2,6 +2,8 @@
 
 let path = require('path');
 let http = require('http');
+const rabbit = require('./rabbitmq/rabbit')
+const service = require('./service/ReplayService')
 
 let oas3Tools = require('oas3-tools');
 let serverPort = process.env.ENDPOINT_PORT || 8081;
@@ -29,5 +31,16 @@ http.createServer(app).listen(serverPort, function () {
             console.log(eureka.getInstancesByAppId('GAME_SERVICE'));
         }
     })
+    rabbit.connect()
+        .then(() => {
+            rabbit.startReceiving((msg) => {
+                service.add_replay(JSON.parse(msg))
+                    .then((data) => {console.log('Handled new rabbit message!')})
+                    .catch((err) => {console.error(err);})
+            })
+        })
+        .catch((err)=>{
+            console.error('Error when connecting to rabbitMQ:',err);
+        })
 });
 

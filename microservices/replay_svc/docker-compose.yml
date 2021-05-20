@@ -20,7 +20,7 @@ services:
     image: postgres
     container_name: swa_replays_postgres
     ports:
-      - "5432:5432"
+      - "${PGPORT}:5432"
     volumes:
       - swa_replays_postgres_volume:/var/lib/postgresql/data
       - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
