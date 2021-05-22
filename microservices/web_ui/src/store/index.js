@@ -13,8 +13,12 @@ export default new Vuex.Store({
         messageOfTheDay: '',
         lobbies: [],
         nick: null,
+        replaysRecent: [],
     },
     mutations: {
+        setReplays(state, payload) {
+            Vue.set(state, 'replaysRecent', payload);
+        },
         setLobbies(state, payload) {
             Vue.set(state, 'lobbies', payload);
         },
@@ -37,7 +41,6 @@ export default new Vuex.Store({
             console.log('context', context);
             context.state.root.modal.show(modal, props, acceptFn, rejectFn)
         }
-    }
-    ,
+    },
     modules: {}
 })

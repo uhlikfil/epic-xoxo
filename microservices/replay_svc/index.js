@@ -4,19 +4,28 @@ let path = require('path');
 let http = require('http');
 const rabbit = require('./rabbitmq/rabbit')
 const service = require('./service/ReplayService')
+const cors = require('cors');
 
 let oas3Tools = require('oas3-tools');
+const express = require("express");
 let serverPort = process.env.ENDPOINT_PORT || 8081;
 
 // swaggerRouter configuration
 let options = {
     routing: {
-        controllers: path.join(__dirname, './controllers')
+        controllers: path.join(__dirname, './controllers'),
     },
 };
 
 let expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
-let app = expressAppConfig.getApp();
+let oas_app = expressAppConfig.getApp();
+const app = express();
+app.use(cors());
+app.options('*', cors())
+
+for (let i = 2; i < oas_app._router.stack.length; i++) {
+    app._router.stack.push(oas_app._router.stack[i])
+}
 
 // Initialize the Swagger middleware
 http.createServer(app).listen(serverPort, function () {

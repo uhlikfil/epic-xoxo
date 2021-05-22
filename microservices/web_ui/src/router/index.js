@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import LocalSetup from "@/views/LocalSetup";
 import Local from "@/views/Local";
 import Online from "@/views/Online";
+import ReplayBrowser from "@/views/ReplayBrowser";
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     path: '/online',
     name: 'Online',
     component: Online
+  },
+  {
+    path: '/replaybrowser',
+    name: 'ReplayBrowser',
+    component: ReplayBrowser
   },
 ]
 

@@ -75,7 +75,9 @@ export default {
   },
   created() {
     try {
-      let ws = new WebsocketHandler('localhost', 9999)
+      const hostname = process.env.VUE_APP_WEBSOCKET_HOSTNAME || 'localhost'
+      const port = process.env.VUE_APP_WEBSOCKET_PORT || 8083
+      let ws = new WebsocketHandler(hostname, port)
       this.$store.commit('setWs', ws)
       this.$root.modal.show(ModalProgress, {header: 'Connecting', msg: 'Establishing connection with the backend service, please wait...'},
           () => {}, () => {}

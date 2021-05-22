@@ -1,5 +1,4 @@
 import {LobbiesState} from "@/js/ws/LobbiesState";
-import {LobbyState} from "@/js/ws/LobbyState";
 
 export class WebsocketHandler {
     constructor(hostname, port) {

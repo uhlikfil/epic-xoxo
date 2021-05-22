@@ -18,7 +18,7 @@ export class LobbiesState extends State {
             (name) => {soc.send(JSON.stringify({code: 'nick', payload: name}))},
             () => {
                 store.state.root.modal.hide();
-                store.state.root.$router.push('/');
+                // store.state.root.$router.push('/');
                 store.state.ws.close();
             }
         )

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  swa_game_service:
+    build: .
+    image: swa/game/service
+    env_file: .env
+    ports:
+      - ${PORT_OUTSIDE}:${PORT_INSIDE}
+    command: node /usr/app/main.js

@@ -1,0 +1,17 @@
+server.port: 8090
+eureka:
+  instance:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes:
+    high_score_service:
+      path: /high_scores/**
+      serviceId: HIGH_SCORE_SVC
+    replays_service:
+      path: /high_scores/**
+      serviceId: REPLAY_SERVICE
+    user_service:
+      path: /high_scores/**
+      serviceId: USER_SVC

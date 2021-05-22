@@ -60,7 +60,6 @@ exports.filter_replays = function (body) {
                 return
             }
             if (body.player1Id) {
-                console.log('wtf');
                 wheres.push(['player1Id=', body.player1Id]);
             }
             if (body.player2Id) {wheres.push(['player2Id=', body.player2Id])}
@@ -94,7 +93,7 @@ exports.filter_replays = function (body) {
                 sql += ' where '
             }
             sql += wheres.join(' AND ')
-            sql += ' ORDER BY date DESC';
+            sql += ' ORDER BY date DESC LIMIT 10';
             db.customQuery(sql, values)
                 .then((value) => {
                     resolve(value.rows)

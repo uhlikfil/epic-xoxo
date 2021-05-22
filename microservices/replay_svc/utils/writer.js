@@ -17,7 +17,7 @@ var writeJson = exports.writeJson = function(response, arg1, arg2) {
   }
 
   if (arg1 && Number.isInteger(arg1)) {
-    response.writeHead(arg1, {'Content-Type': 'application/json'});
+    response.writeHead(arg1, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
     response.end('{}');
     return;
   }
@@ -44,6 +44,6 @@ var writeJson = exports.writeJson = function(response, arg1, arg2) {
   if(typeof payload === 'object') {
     payload = JSON.stringify(payload, null, 2);
   }
-  response.writeHead(code, {'Content-Type': 'application/json'});
+  response.writeHead(code, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
   response.end(payload);
 }

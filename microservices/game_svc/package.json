@@ -10,6 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.8.0",
+    "eureka-js-client": "^4.5.0",
     "ws": "^7.4.4"
+  },
+  "devDependencies": {
+    "@types/pg": "^7.14.11",
+    "@types/eureka-js-client": "4.5.2"
   }
 }

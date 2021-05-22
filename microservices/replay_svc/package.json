@@ -15,6 +15,7 @@
   "dependencies": {
     "amqplib": "^0.8.0",
     "connect": "^3.2.0",
+    "cors": "^2.8.5",
     "eureka-js-client": "^4.5.0",
     "js-yaml": "^3.3.0",
     "oas3-tools": "^2.2.3",
