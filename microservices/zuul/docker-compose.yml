@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  eureka_server:
+    container_name: swa_zuul
+    build: .
+    ports: 
+      - 8090:8090
+    command: "java -jar /app/zuul-1.jar"
