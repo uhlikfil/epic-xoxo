@@ -101,11 +101,11 @@ def update_user(body, username):  # noqa: E501
 
     :rtype: User
     """
-    if not valid.is_valid_username(username):
-        __err_invalid_data()
     body = Body.from_dict(body)  # noqa: E501
+    user = get_user_by_username(username)
+    if user.last_ip == body.ip:
+        return user
     if not valid.is_valid_ip_address(body.ip):
         __err_invalid_data()
-    if not db.update_user(username, body.ip):
-        __err_not_found()
+    db.update_user(username, body.ip)
     return get_user_by_username(username)
