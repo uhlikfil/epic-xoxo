@@ -37,16 +37,17 @@ class MessageHandler {
                             Gateway.getUser(msg.payload)
                                 .then((res) => {
                                     Gateway.updateUser(msg.payload, socket._socket.remoteAddress)
-                                        .then((res) => {})
+                                        .then((res) => {
+                                        })
                                         .catch((err) => {
-                                            console.log('failed update');
                                         })
                                 })
                                 .catch((err) => {
                                     Gateway.createUser(msg.payload, socket._socket.remoteAddress)
-                                        .then((result) => {})
+                                        .then((result) => {
+                                        })
                                         .catch((err) => {
-                                            console.log('failed creating user');
+                                            console.log(err);
                                             valid = false
                                         })
                                 })

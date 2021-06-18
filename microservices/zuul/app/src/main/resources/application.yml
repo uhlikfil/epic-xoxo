@@ -3,13 +3,13 @@ spring:
     name: zuul
 server.port: 8090
 eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: http://127.0.0.1:8761/eureka
-  instance:
-      client:
-        serviceUrl:
-          defaultZone: http://127.0.0.1:8761/eureka
+  client:
+    serviceUrl:
+      defaultZone: http://172.17.0.1:8761/eureka
+#  instance:
+#      client:
+#        serviceUrl:
+#          defaultZone: http://172.17.0.1:8761/eureka
 zuul:
   routes:
     high_score_service:
