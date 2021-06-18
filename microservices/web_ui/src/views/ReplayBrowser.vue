@@ -78,7 +78,7 @@ export default {
       const body = JSON.stringify(createBody(this.$data));
       console.log('request body', body);
       this.canSearch = false
-      fetch(Gateway.replays + 'replay/filter/', {
+      fetch(Gateway.replays + '/replay/filter/', {
         body: body, method: 'POST',
         headers: {
           'Content-Type': 'application/json'

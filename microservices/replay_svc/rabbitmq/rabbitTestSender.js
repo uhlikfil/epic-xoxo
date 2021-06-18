@@ -1,10 +1,10 @@
 const rabbit = require('./rabbit')
 
-rabbit.connect().then(() => {
+rabbit.connect('amqp://localhost:5555').then(() => {
     sendStuff()
 });
 
-const names = ['asd', 'dsfnajsidas', 'mates', 'filip', 'ondra','david','petr','jonas', 'theodore', 'sadnauid', 'your mom']
+const names = ['asd', 'dsfnajsidas', 'mates', 'filip', 'ondra', 'david', 'petr', 'jonas', 'theodore', 'sadnauid', 'your mom']
 
 function randomName(except = -1) {
     let rnd = except;
@@ -17,9 +17,9 @@ function randomName(except = -1) {
 function sendStuff() {
     setTimeout(() => {
         let [idx, plr1] = randomName();
-        let [,plr2] = randomName(idx)
-        let winner = Math.random() > 0.5? plr1 : plr2
-        let starter = Math.random() > 0.5? plr1 : plr2
+        let [, plr2] = randomName(idx)
+        let winner = Math.random() > 0.5 ? plr1 : plr2
+        let starter = Math.random() > 0.5 ? plr1 : plr2
         let completed = Math.random() < 0.95
         const replay = {
             "date": new Date().toISOString(),

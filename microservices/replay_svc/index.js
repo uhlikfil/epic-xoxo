@@ -19,16 +19,8 @@ let options = {
 
 let expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
 let oas_app = expressAppConfig.getApp();
-const app = express();
-app.use(cors());
-app.options('*', cors())
 
-for (let i = 2; i < oas_app._router.stack.length; i++) {
-    app._router.stack.push(oas_app._router.stack[i])
-}
-
-// Initialize the Swagger middleware
-http.createServer(app).listen(serverPort, function () {
+http.createServer(oas_app).listen(serverPort, function () {
     console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
     console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
 
@@ -37,19 +29,31 @@ http.createServer(app).listen(serverPort, function () {
         if (error) {console.log('Error registering with eureka:', error);}
         else {
             console.log('Successfully connected to Eureka!');
-            console.log(eureka.getInstancesByAppId('GAME_SERVICE'));
+            connectToRabbit(eureka)
         }
     })
-    rabbit.connect()
-        .then(() => {
-            rabbit.startReceiving((msg) => {
-                service.add_replay(JSON.parse(msg))
-                    .then((data) => {console.log('Handled new rabbit message!')})
-                    .catch((err) => {console.error(err);})
-            })
-        })
-        .catch((err)=>{
-            console.error('Error when connecting to rabbitMQ:',err);
-        })
 });
 
+function connectToRabbit(eureka) {
+    console.log('Connecting to rabbitMq...');
+    let instances = eureka.getInstancesByAppId('rabbitmq')
+    if (instances.length > 0) {
+        const address = 'amqp://' + instances[0].hostName + ':' + instances[0].port['$'];
+        rabbit.connect(address)
+            .then(() => {
+                console.log('Connected to rabbitMq');
+                rabbit.startReceiving((msg) => {
+                    service.add_replay(JSON.parse(msg))
+                        .then((data) => {console.log('Handled rabbit message!')})
+                        .catch((err) => {console.error(err);})
+                })
+            })
+            .catch((err) => {
+                console.error('Error when connecting to rabbitMQ:', err);
+            })
+    }
+    else {
+        console.log('No rabbit is registered in eureka, retrying in 10 seconds');
+        setTimeout(()=>{connectToRabbit(eureka)}, 10000)
+    }
+}

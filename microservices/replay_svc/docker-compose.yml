@@ -5,8 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     image: swa/replays/service
-    # Pro škálování je nutné nemít konkrétní jméno servicy
-    # container_name: nodejs
     env_file: .env
     depends_on:
       - postgres

@@ -7,12 +7,14 @@ class ServerGame {
     height = 15;
     board = [];
     turn = 0; // current player id
-    round = 0;
+    rounds = 0;
     started = false;
     startingPlr = 'Player 1';
-    history = [];
+    startingId = null;
+    plays = [];
     winner = null;
     highlight = {}
+    completed = false
 
     constructor() {
     }
@@ -32,11 +34,13 @@ class ServerGame {
 
     reset() {
         this.turn = 0
-        this.round = 0
+        this.rounds = 0
         this.started = false
-        this.history = null
+        this.plays = []
         this.winner = null
         this.highlight = {}
+        this.startingId = null
+        this.completed = false
         this.initBoard()
         this.initStartingPlr()
     }
@@ -58,9 +62,11 @@ class ServerGame {
         switch (this.startingPlr) {
             case "Player 1":
                 this.turn = 1;
+                this.startingId = this.plr1.id
                 break;
             case "Player 2":
                 this.turn = 2;
+                this.startingId = this.plr2.id
                 break;
             default:
                 this.turn = Math.random() > 0.5 ? 1 : 2;
@@ -83,6 +89,7 @@ class ServerGame {
             // let tmp = this.board[y]
             // tmp[x] = this.turn;
             this.board[y][x] = this.turn;
+            this.rounds++
 
             let result = this.checkWin(x,y, this.turn)
             this.highlight = {}
@@ -93,11 +100,14 @@ class ServerGame {
 
             if (result.win) {
                 this.winner = this.turn === 1 ? this.plr1 : this.plr2
+                this.completed = true
                 result.winner = this.winner
             }
             else {
                 this.turn = (this.turn % 2) + 1
             }
+            this.plays.push([x,y])
+
             return result;
         }
         return false

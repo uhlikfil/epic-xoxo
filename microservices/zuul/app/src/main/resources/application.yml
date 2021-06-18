@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: zuul
+server.port: 8090
+eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://127.0.0.1:8761/eureka
+  instance:
+      client:
+        serviceUrl:
+          defaultZone: http://127.0.0.1:8761/eureka
+zuul:
+  routes:
+    high_score_service:
+      path: /high_scores/**
+      serviceId: HIGH_SCORE_SVC
+    replay_service:
+      path: /replays/**
+      serviceId: REPLAY_SERVICE
+    user_service:
+      path: /users/**
+      serviceId: USER_SVC
+ribbon:
+  readTimeout: 120000 #Request processing timeout time
+  connectTimeout: 30000 #Request connection timeout

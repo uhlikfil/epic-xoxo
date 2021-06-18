@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Replayz
+  title: Replay Service
   description: 'Stores and serves replays of the game `connect 5`.'
   contact:
     email: neuvimat@fel.cvut.cz

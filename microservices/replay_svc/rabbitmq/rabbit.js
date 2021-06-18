@@ -1,5 +1,4 @@
 const amqp = require('amqplib')
-const service = require('../service/ReplayService')
 
 const queue = 'finished_games_replays'
 
@@ -37,10 +36,10 @@ class Rabbit {
         }
     }
 
-    async connect() {
+    async connect(address) {
         // if (!process.env.RABBIT_URL) {throw new Error('Please set the RABBIT_URL environmental variable!')}
         {
-            const conn = await amqp.connect(process.env.RABBIT_URL || 'amqp://localhost:5555');
+            const conn = await amqp.connect(address);
             const ch = await conn.createChannel();
             await ch.assertQueue(queue)
             this.channel = ch;

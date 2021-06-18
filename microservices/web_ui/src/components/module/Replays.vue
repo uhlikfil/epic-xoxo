@@ -1,11 +1,13 @@
 <template>
   <div class="replays">
-    <h2>Replays</h2>
+    <details>
+      <summary><h2>Replays</h2></summary>
     <h3>Recent</h3>
     <ul>
       <Replay v-for="r in replaysIntro" :r="r"/>
     </ul>
     <button @click="$router.push('/replaybrowser')">Browse replays</button>
+    </details>
   </div>
 </template>
 
@@ -27,7 +29,7 @@ export default {
     }
   },
   mounted() {
-    fetch(Gateway.replays + 'replay/filter/', {
+    fetch(Gateway.replays + '/replay/filter/', {
       body: '{"completed":true}', method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -36,8 +38,6 @@ export default {
       return data.json()
     }).then((parsed) => {
       this.$store.commit('setReplays', parsed)
-      console.log(parsed);
-      console.log('commited');
     })
   },
   methods: {
@@ -58,4 +58,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+h2 {
+  display: inline-block;
+}
 </style>

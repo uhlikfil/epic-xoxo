@@ -23,8 +23,6 @@ export default {
     }
   },
   mounted() {
-    console.log('this.$props', this.$props);
-    console.log('this.$attrs', this.$attrs);
   }
 }
 </script>

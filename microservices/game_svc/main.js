@@ -1,6 +1,9 @@
 const WebSocket = require('ws');
-const port = process.env.PORT_INSIDE || 8080
+const port = process.env.PORT_INSIDE || 8083
 const wss = new WebSocket.Server({port: port});
+
+const eureka = require('./ms/eureka')
+const rabbit = require('./ms/rabbit')
 
 const GameBank = new (require('./GameBank'))()
 const MessageHandler = new (require('./MessageHandler'))
@@ -56,3 +59,27 @@ wss.on('connection', function connection(ws) {
 
     ws.send(JSON.stringify({code: 'motd', payload: motds[Math.floor(Math.random()*motds.length)]}));
 });
+
+eureka.start(()=>{
+    console.log('Connected to eureka!');
+    connectToRabbit(eureka)
+})
+
+function connectToRabbit(eureka) {
+    console.log('Connecting to rabbitMq...');
+    let instances = eureka.getInstancesByAppId('rabbitmq')
+    if (instances.length > 0) {
+        const address = 'amqp://' + instances[0].hostName + ':' + instances[0].port['$'];
+        rabbit.connect(address)
+            .then(() => {
+                console.log('Connected to rabbitMq');
+            })
+            .catch((err) => {
+                console.error('Error when connecting to rabbitMQ:', err);
+            })
+    }
+    else {
+        console.log('No rabbit is registered in eureka, retrying in 10 seconds');
+        setTimeout(()=>{connectToRabbit(eureka)}, 10000)
+    }
+}

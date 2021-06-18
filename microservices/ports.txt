@@ -1,11 +1,8 @@
-achievement_svc - TODO
 eureka		- 8761
-game_svc	- 8083
-high_score_svc	- 8300
-lobby_svc	- N/A
 rabbitmq	- 5555 (5556 for ui)
-replay_svc	- 8081
+replay_svc	- 8081, 8001 pgadmin, 5432 db
+game_svc	- 8083
 user_svc	- 8100
-web_server	- N/A
+high_score_svc	- 8300, 8098 phpmyadmin (app_user_420 : cats_are_best_69)
 web_ui		- 8080
 zuul		- 8090

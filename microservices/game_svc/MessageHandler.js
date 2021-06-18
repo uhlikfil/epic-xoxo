@@ -1,4 +1,9 @@
 const Lobby = require('./Lobby')
+const axios = require("axios");
+const Gateway = require('./ms/Gateway')
+const rabbit = require('./ms/rabbit')
+
+
 let gb = 40;
 
 let ID = 0;
@@ -28,9 +33,33 @@ class MessageHandler {
                         if (gb.users[msg.payload] === undefined) {
                             gb.users[msg.payload] = context
                             context.id = msg.payload
-                            socket.send(JSON.stringify({code: 'regsucc', payload: msg.payload}))
+                            let valid = true;
+                            Gateway.getUser(msg.payload)
+                                .then((res) => {
+                                    Gateway.updateUser(msg.payload, socket._socket.remoteAddress)
+                                        .then((res) => {})
+                                        .catch((err) => {
+                                            console.log('failed update');
+                                        })
+                                })
+                                .catch((err) => {
+                                    Gateway.createUser(msg.payload, socket._socket.remoteAddress)
+                                        .then((result) => {})
+                                        .catch((err) => {
+                                            console.log('failed creating user');
+                                            valid = false
+                                        })
+                                })
+                                .finally(() => {
+                                    if (valid) {
+                                        socket.send(JSON.stringify({code: 'regsucc', payload: msg.payload}))
+                                    }
+                                    else {
+                                        socket.send(JSON.stringify({code: 'err', payload: 'Chyba v registraci / updatu nicku.'}))
+                                    }
+                                })
                         }
-                        else {socket.send(JSON.stringify({code: 'err', payload: 'Name already taken'}))}
+                        else {socket.send(JSON.stringify({code: 'err', payload: 'Jméno už někdo aktivně používá'}))}
                     }
                     else {
                         socket.send(JSON.stringify({code: 'err', payload: 'Name not specified'}))
@@ -200,6 +229,7 @@ class MessageHandler {
                             socket.send(err('Invalid move!'))
                         }
                         else if (result.win) {
+                            rabbit.sendGameResults(context.lobby.game)
                             for (let c of context.lobby.connections) {
                                 c.socket.send(mes('played', {x, y, plr, next: plr}))
                                 c.socket.send(mes('highlight', result.highlight))
@@ -233,6 +263,7 @@ class MessageHandler {
                     if (l.otherRematch && l.hostRematch) {
                         console.log('both want rematch');
                         let game = context.lobby.game
+                        game.reset()
                         context.lobby.start()
                         context.lobby.hostRematch = false
                         context.lobby.otherRematch = false

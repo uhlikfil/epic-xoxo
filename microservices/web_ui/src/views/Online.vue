@@ -6,7 +6,6 @@
       <Board @cell="clickCell" :game="replica" :highlights="replica.highlight"/>
       <div v-if="replica.uiState === 1">
         <button @click="promptDisconnect">Leave</button>
-        <button @click="promptSurrender">Surrender</button>
       </div>
       <div v-if="replica.uiState === 2">
         <button @click="promptDisconnect">Leave</button>

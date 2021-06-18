@@ -1,6 +1,7 @@
 let gb;
 
 const ServerGame = require('./ServerGame')
+const rabbit = require('./ms/rabbit')
 
 setTimeout(() => {
     gb = require('./Globals').gb
@@ -21,6 +22,8 @@ class Lobby {
 
     start() {
         this.inGame = true
+        this.game.plr1 = this.host
+        this.game.plr2 = this.other
         this.game.initBoard()
         this.game.initStartingPlr()
     }
@@ -59,6 +62,12 @@ class Lobby {
         else if (this.inGame) {
             for (let c of this.connections) {
                 c.socket.send(JSON.stringify({code: 'ingameLeft'}))
+                if (!this.game.completed) {
+                    console.log('Ragequit detected!');
+                    console.log('ragequitter: ' + connection.id);
+                    this.game.winner = connection == this.host ? this.game.plr2 : this.game.plr1;
+                    rabbit.sendGameResults(this.game)
+                }
             }
         }
         else {

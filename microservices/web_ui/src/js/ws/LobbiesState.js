@@ -11,14 +11,15 @@ export class LobbiesState extends State {
         super(context);
     }
 
-    onOpen(e,soc) {
+    onOpen(e, soc) {
         store.state.root.modal.forceAccept()
         store.state.root.modal.show(ModalInput,
             {header: 'Choose your nickname', prompt: 'nickname', resolve: 'Accept', reject: 'Back'},
-            (name) => {soc.send(JSON.stringify({code: 'nick', payload: name}))},
+            (name) => {
+                soc.send(JSON.stringify({code: 'nick', payload: name}))
+            },
             () => {
                 store.state.root.modal.hide();
-                // store.state.root.$router.push('/');
                 store.state.ws.close();
             }
         )
@@ -60,6 +61,12 @@ export class LobbiesState extends State {
         else if (json.code == 'regsucc') {
             store.state.nick = json.payload
             this.context.refreshLobbies()
+        }
+        else if (json.code == 'err') {
+            store.state.root.modal.show(ModalOk, {header: 'Chyba', msg: json.payload},
+                () => {
+                    store.state.root.$router.push('/');
+                })
         }
     }
 

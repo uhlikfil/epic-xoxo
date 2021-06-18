@@ -1,0 +1,37 @@
+version: '3'
+services:
+  swa_replays_test:
+    build:
+      context: ./..
+      dockerfile: ./Dockerfile
+    image: swa/replays/service
+    env_file: .env
+    depends_on:
+      - postgres_test
+    volumes:
+      - ./..:/usr/app/
+    command: ./wait-for-it.sh postgres_test:${PGPORT} -- npm run test
+  postgres_test:
+    image: postgres
+    container_name: swa_replays_postgres_test
+    ports:
+    - '5433:${PGPORT}'
+    volumes:
+      - swa_replays_postgres_volume_test:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    env_file:
+      - ./.env
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: swa_replays_pgadmin_test
+    depends_on:
+      - postgres_test
+    ports:
+      - "8002:80"
+    env_file:
+      - ./.env
+    volumes:
+      - /var/lib/pgadmin
+volumes:
+  swa_replays_postgres_volume_test:
+    name: swa_replays_postgres_volume_test

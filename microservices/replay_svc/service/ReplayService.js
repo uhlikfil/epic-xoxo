@@ -65,7 +65,7 @@ exports.filter_replays = function (body) {
             if (body.player2Id) {wheres.push(['player2Id=', body.player2Id])}
             if (body.winnerId) {wheres.push(['winnerId=', body.winnerId])}
             if (body.startingId) {wheres.push(['startingId=', body.startingId])}
-            if (body.completed) {wheres.push(['completed=', body.completed])}
+            if (body.completed != undefined) {wheres.push(['completed=', body.completed])}
             if (body.date) {
                 if (body.date.before) {
                     body.date.before = new Date(body.date.before)
