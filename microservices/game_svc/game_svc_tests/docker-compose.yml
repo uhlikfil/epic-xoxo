@@ -1,7 +1,9 @@
 version: '3'
 services:
   swa_game_service_test:
-    build: .
+    build:
+      context: ./..
+      dockerfile: ./Dockerfile
     image: swa/game/service
     env_file: .env
     ports:
